@@ -72,11 +72,31 @@
       text-transform: uppercase;
       color: var(--ink-soft);
       text-decoration: none;
-      position: relative;
       transition: color 0.2s;
     }
 
     .nav-links a:hover { color: var(--ink); }
+
+    /* ── MOBILE MENU TOGGLE ── */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 18px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 101;
+    }
+
+    .menu-toggle span {
+      width: 100%;
+      height: 2px;
+      background-color: var(--ink);
+      transition: all 0.3s ease;
+    }
 
     /* ── SECTIONS ── */
     section {
@@ -84,8 +104,6 @@
       max-width: 1100px;
       margin: 0 auto;
     }
-
-    section:not(#home) { border-top: 1px solid var(--rule); }
 
     #home {
       display: grid;
@@ -116,7 +134,6 @@
 
     .bio-col h1 em { font-style: italic; font-weight: 400; color: var(--accent-warm); }
 
-        /* ── TAGS ── */
     .tag-row {
       display: flex;
       flex-wrap: wrap;
@@ -125,7 +142,7 @@
     }
 
     .tag {
-      font-size: 12px;
+      font-size: 11px;
       text-transform: uppercase;
       padding: 5px 14px;
       border: 1px solid var(--rule);
@@ -133,21 +150,48 @@
       letter-spacing: 0.05em;
       background: rgba(123, 110, 93, 0.04);
       border-radius: 2px;
-      white-space: nowrap;
     }
 
-        /* ── MOBILE FIXES ── */
+    /* ── MOBILE FIXES ── */
     @media (max-width: 768px) {
       nav { padding: 0 1.5rem; }
-      .nav-links { display: none; }
+      
+      .menu-toggle { display: flex; }
+
+      .nav-links {
+        display: none; /* Hidden by default */
+        flex-direction: column;
+        position: absolute;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        background: var(--cream);
+        padding: 3rem 1.5rem;
+        border-bottom: 1px solid var(--rule);
+        gap: 2rem;
+        text-align: center;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      }
+
+      .nav-links.active { display: flex; }
+
+      /* Animate Hamburger to X */
+      .menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+      .menu-toggle.active span:nth-child(2) { opacity: 0; }
+      .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
       section { padding: 4rem 1.5rem; }
-      #home { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
-      .photo-col { align-items: center; max-width: 300px; margin: 0 auto; }
-      .project-grid { grid-template-columns: 1fr !important; }
-      .about-grid, .teaching-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      #home { 
+        grid-template-columns: 1fr; 
+        gap: 2.5rem; 
+        text-align: center; 
+        padding-top: 120px;
+      }
+      .photo-col { max-width: 280px; margin: 0 auto; }
+      .tag-row { justify-content: center; }
     }
 
-    .fade-in { opacity: 0; transform: translateY(18px); transition: 0.6s ease; }
+    .fade-in { opacity: 0; transform: translateY(18px); transition: 0.8s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
@@ -155,10 +199,13 @@
 
   <nav>
     <a class="nav-name" href="#home">Meghan Gilligan</a>
-    <button class="menu-toggle" aria-label="Toggle Menu">
-    <span></span>
-    <span></span>
-    <span></span>
+    
+    <button class="menu-toggle" id="mobile-menu" aria-label="Open Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
       <li><a href="philosophy.html">Philosophy</a></li>
@@ -174,16 +221,18 @@
       <div class="photo-frame">
         <img src="headshot.jpg" alt="Meghan Gilligan" />
       </div>
-      <p style="font-size: 12px; color: var(--ink-muted); text-transform: uppercase; margin-top: 1rem;">Meghan Gilligan &mdash; Durham Region</p>
+      <p style="font-size: 11px; color: var(--ink-muted); text-transform: uppercase; margin-top: 1rem; letter-spacing: 0.1em;">Meghan Gilligan &mdash; Durham Region</p>
     </div>
 
     <div class="bio-col">
-      <p style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-warm);">Educational Portfolio</p>
+      <p style="font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent-warm); margin-bottom: 0.5rem;">Educational Portfolio</p>
       <h1>Learning designer,<br /><em>educator</em>, and<br />career practitioner</h1>
+      
       <div class="bio-text">
         <p>I work at the intersection of adult learning, instructional design, and human development, helping people navigate transitions into work, education, and professional practice.</p>
         <p style="margin-top: 1rem;">With fifteen years of experience spanning employment counselling, career coaching, and post-secondary teaching, I bring both depth of practice and a strong theoretical grounding in adult learning.</p>
       </div>
+
        <div class="tag-row">
         <span class="tag">Adult Learning</span>
         <span class="tag">Instructional Design</span>
@@ -194,18 +243,36 @@
     </div>
   </section>
 
-   <footer style="padding: 4rem 3rem; background: var(--warm-white); text-align: center; border-top: 1px solid var(--rule);">
-    <p style="font-size: 12px; color: var(--ink-muted);">&copy; 2026 Meghan Gilligan | Educational Studies Portfolio</p>
-    <div style="margin-top: 1rem;">
-      <a href="mailto:meghan.gilligan@ontariotechu.net" style="text-decoration: none; color: var(--ink); font-size: 12px; text-transform: uppercase; font-weight: 700;">Contact</a>
+  <footer style="padding: 4rem 3rem; background: var(--warm-white); text-align: center; border-top: 1px solid var(--rule);">
+    <p style="font-size: 11px; color: var(--ink-muted); letter-spacing: 0.05em;">&copy; 2026 Meghan Gilligan | Educational Studies Portfolio</p>
+    <div style="margin-top: 1.5rem;">
+      <a href="mailto:meghan.gilligan@ontariotechu.net" style="text-decoration: none; color: var(--ink); font-size: 12px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.1em; border-bottom: 1px solid var(--accent-warm);">Contact</a>
     </div>
   </footer>
 
   <script>
+    // Intersection Observer for animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Mobile Menu Logic
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
   </script>
 
 </body>
