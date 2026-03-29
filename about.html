@@ -14,29 +14,97 @@
       --ink-soft: #4A4640;
       --ink-muted: #8C887F;
       --accent: #7B6E5D;
-      --accent-light: #C4B8A8;
-      --accent-warm: #A08B6E;
       --rule: #DDD8CF;
       --nav-height: 72px;
       --header-font: 'Montserrat', sans-serif;
       --body-font: 'DM Sans', sans-serif;
     }
-    body { font-family: var(--body-font); background: var(--cream); color: var(--ink); font-size: 16px; line-height: 1.7; }
-    nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height); background: rgba(247, 244, 239, 0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; z-index: 100; }
-    .nav-name { font-family: var(--header-font); font-size: 18px; font-weight: 700; color: var(--ink); text-decoration: none; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; }
-    section { padding: 8rem 3rem 5rem; max-width: 1100px; margin: 0 auto; min-height: 80vh; }
     
-    /* Mobile Fixes for About Page */
+    body { 
+      font-family: var(--body-font); 
+      background: var(--cream); 
+      color: var(--ink); 
+      font-size: 17px; /* Increased slightly for better legibility in single column */
+      line-height: 1.8; 
+      -webkit-font-smoothing: antialiased;
+    }
+
+    nav { 
+      position: fixed; 
+      top: 0; left: 0; right: 0; 
+      height: var(--nav-height); 
+      background: rgba(247, 244, 239, 0.92); 
+      backdrop-filter: blur(12px); 
+      border-bottom: 1px solid var(--rule); 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      padding: 0 3rem; 
+      z-index: 100; 
+    }
+
+    .nav-name { 
+      font-family: var(--header-font); 
+      font-size: 18px; 
+      font-weight: 700; 
+      color: var(--ink); 
+      text-decoration: none; 
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { 
+      font-size: 12px; 
+      letter-spacing: 0.1em; 
+      text-transform: uppercase; 
+      color: var(--ink-soft); 
+      text-decoration: none; 
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    
+    section { 
+      padding: 10rem 2rem 6rem; 
+      max-width: 720px; /* Optimized line length for reading */
+      margin: 0 auto; 
+      min-height: 80vh; 
+    }
+    
+    .label {
+      font-size: 11px; 
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase; 
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    h2 { 
+      font-family: var(--header-font); 
+      font-size: 36px; 
+      line-height: 1.2;
+      margin-bottom: 3rem; 
+      color: var(--ink);
+    }
+
+    .content-paragraph { 
+      color: var(--ink-soft); 
+      margin-bottom: 2rem; /* Consistent spacing between thoughts */
+    }
+
     @media (max-width: 768px) {
       nav { padding: 0 1.5rem; }
       .nav-links { display: none; }
-      section { padding: 6rem 1.5rem 4rem; }
-      .about-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+      section { padding: 7rem 1.5rem 4rem; }
+      h2 { font-size: 28px; }
     }
 
-    footer { padding: 4rem 3rem; background: var(--warm-white); text-align: center; border-top: 1px solid var(--rule); }
+    footer { 
+      padding: 4rem 3rem; 
+      background: var(--warm-white); 
+      text-align: center; 
+      border-top: 1px solid var(--rule); 
+    }
   </style>
 </head>
 <body>
@@ -52,30 +120,28 @@
     </ul>
   </nav>
 
-<section>
-    <p style="font-size: 12px; text-transform: uppercase; color: var(--ink-muted);">01 — About</p>
-    <h2 style="font-family: var(--header-font); font-size: 32px; margin-top: 0.5rem; margin-bottom: 2.5rem;">A practitioner who designs for the person</h2>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;">
-      <div>
-        <p style="font-size: 15px; color: var(--ink-soft);">My work has always been about meeting people in the middle of change. For more than fifteen years, I have worked across education, employment, and human development. I believe that good learning design begins with deep respect for the learner.</p>
-        <p style="font-size: 15px; color: var(--ink-soft); margin-top: 1.25rem;">I began my career as an employment counsellor, holding a diploma in social service work, building a practice spanning youth programming and community development.</p>
-      </div>
-      <div>
-        <p style="font-size: 15px; color: var(--ink-soft);">My undergraduate degree in educational studies has given me the theoretical grounding for my work. I approach instructional design with principle, using frameworks like backward design and drawing on experiential learning theory.</p>
-        <p style="font-size: 15px; color: var(--ink-soft); margin-top: 1.25rem;">I am drawn to roles where I can contribute to experiences that take equity and accessibility seriously.</p>
-      </div>
-      <div>
-        <p style="font-size: 15px; color: var(--ink-soft);">I am a graduate of the Durham College Social Service Worker program and have built a career that has taken me from facilitating employability workshops in secondary schools, to supporting individuals in the community through Employment Services, to teaching in the very program from which I graduated. That last experience was one of the most rewarding of my career and what inspired me to pursue a Bachelor of Arts in Educational Studies, specializing in Adult Learning with Technology. My undergraduate degree has given me language and theoretical grounding for what I had been doing intuitively for years. I now approach instructional and learning design with both practice and principle, drawing on frameworks such as backward design, Universal Design for Learning, and experiential learning theory.</p>
-</div>
-    <div>
-<p style="font-size: 15px; color: var(--ink-soft); margin-top: 1.25rem;">Equity is foundational to everything I do. My learners have included individuals navigating systemic poverty, internationally trained professionals, newcomers to Canada, and people managing significant mental health challenges. These experiences have taught me that good learning design must begin with deep respect for the learner, and that equity requires more than good intentions; it demands thoughtful, intentional design choices. I am committed to creating inclusive, accessible learning environments where adult learners feel seen, valued, and empowered to apply new skills to their lives and careers.</p>
- </div>
-      <div>
-<p style="font-size: 15px; color: var(--ink-soft); margin-top: 1.25rem;">My professional interests lie in post-secondary education and instructional design, where I can contribute to programs and experiences built around who learners actually are. I am drawn to roles that take accessibility seriously and that integrate andragogical principles with purposeful educational technology.</p>
- </div>
-      <div>
-<p style="font-size: 15px; color: var(--ink-soft); margin-top: 1.25rem;">This portfolio reflects my growth as an educator and educational designer over the course of my undergraduate degree. Visitors will find my teaching philosophy, a professional reflection on my learning context and design practice, artifacts I have created, and a discussion of my approach to assessment, educational technology, and inclusive design. Together, these sections tell the story of a practitioner who is committed to lifelong learning and to creating meaningful, equitable experiences for adult learners.</p>
- </div>
+  <section>
+    <span class="label">01 — About</span>
+    <h2>A practitioner who designs for the person</h2>
+    
+    <div class="content-wrapper">
+      <p class="content-paragraph">My work has always been about meeting people in the middle of change. For more than fifteen years, I have worked across education, employment, and human development. I believe that good learning design begins with deep respect for the learner.</p>
+      
+      <p class="content-paragraph">I began my career as an employment counsellor, holding a diploma in social service work, building a practice spanning youth programming and community development.</p>
+
+      <p class="content-paragraph">My undergraduate degree in educational studies has given me the theoretical grounding for my work. I approach instructional design with principle, using frameworks like backward design and drawing on experiential learning theory.</p>
+
+      <p class="content-paragraph">I am drawn to roles where I can contribute to experiences that take equity and accessibility seriously.</p>
+
+      <p class="content-paragraph">I am a graduate of the Durham College Social Service Worker program and have built a career that has taken me from facilitating employability workshops in secondary schools, to supporting individuals in the community through Employment Services, to teaching in the very program from which I graduated. That last experience was one of the most rewarding of my career and what inspired me to pursue a Bachelor of Arts in Educational Studies, specializing in Adult Learning with Technology.</p>
+
+      <p class="content-paragraph">My undergraduate degree has given me language and theoretical grounding for what I had been doing intuitively for years. I now approach instructional and learning design with both practice and principle, drawing on frameworks such as backward design, Universal Design for Learning (UDL), and experiential learning theory.</p>
+
+      <p class="content-paragraph">Equity is foundational to everything I do. My learners have included individuals navigating systemic poverty, internationally trained professionals, newcomers to Canada, and people managing significant mental health challenges. These experiences have taught me that good learning design must begin with deep respect for the learner, and that equity requires more than good intentions; it demands thoughtful, intentional design choices. I am committed to creating inclusive, accessible learning environments where adult learners feel seen, valued, and empowered to apply new skills to their lives and careers.</p>
+
+      <p class="content-paragraph">My professional interests lie in post-secondary education and instructional design, where I can contribute to programs and experiences built around who learners actually are. I am drawn to roles that take accessibility seriously and that integrate andragogical principles with purposeful educational technology.</p>
+
+      <p class="content-paragraph">This portfolio reflects my growth as an educator and educational designer over the course of my undergraduate degree. Visitors will find my teaching philosophy, a professional reflection on my learning context and design practice, artifacts I have created, and a discussion of my approach to assessment, educational technology, and inclusive design. Together, these sections tell the story of a practitioner who is committed to lifelong learning and to creating meaningful, equitable experiences for adult learners.</p>
     </div>
   </section>
 
