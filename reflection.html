@@ -12,36 +12,33 @@
       --accent: #7B6E5D; --accent-warm: #A08B6E; --rule: #DDD8CF; --nav-height: 72px;
       --header-font: 'Montserrat', sans-serif; --body-font: 'DM Sans', sans-serif;
     }
-    body { font-family: var(--body-font); background: var(--cream); color: var(--ink); line-height: 1.8; }
+    body { font-family: var(--body-font); background: var(--cream); color: var(--ink); line-height: 1.7; }
     
     /* Navigation */
     nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height); background: rgba(247, 244, 239, 0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; z-index: 100; }
     .nav-name { font-family: var(--header-font); font-size: 18px; font-weight: 700; color: var(--ink); text-decoration: none; }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; transition: color 0.3s ease; }
-    .nav-links a:hover { color: var(--accent-warm); }
+    .nav-links a { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; }
 
-    /* Content Layout */
-    section { padding: 10rem 3rem 8rem; max-width: 800px; margin: 0 auto; }
-    .reflection-container { background: var(--warm-white); padding: 4rem; border: 1px solid var(--rule); }
+    /* Layout */
+    section { padding: 10rem 3rem 6rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; }
     
-    .section-label { font-size: 12px; text-transform: uppercase; color: var(--ink-muted); letter-spacing: 0.1em; margin-bottom: 1rem; display: block; }
-    h1 { font-family: var(--header-font); font-size: 42px; line-height: 1.2; margin-bottom: 2.5rem; color: var(--ink); }
-    h2 { font-family: var(--header-font); font-size: 20px; text-transform: uppercase; letter-spacing: 0.05em; margin: 3rem 0 1.5rem; color: var(--accent-warm); border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem; }
-    
-    p { margin-bottom: 1.5rem; color: var(--ink-soft); font-size: 16px; }
-    
-    .intro-lead { font-size: 20px; color: var(--ink); line-height: 1.6; margin-bottom: 3rem; }
+    .sidebar { position: sticky; top: 10rem; align-self: start; }
+    .section-num { font-size: 14px; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.5rem; display: block; }
+    h1 { font-family: var(--header-font); font-size: 48px; line-height: 1.1; color: var(--ink); }
+
+    .content-area { max-width: 700px; }
+    .content-area p { font-size: 16px; color: var(--ink-soft); margin-bottom: 2rem; }
+    .content-area h2 { font-family: var(--header-font); font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-warm); margin: 3.5rem 0 1.5rem; border-top: 1px solid var(--rule); padding-top: 1.5rem; }
 
     footer { padding: 4rem 3rem; background: var(--warm-white); text-align: center; border-top: 1px solid var(--rule); }
 
-    /* Mobile Adjustments */
-    @media (max-width: 768px) {
-      nav { padding: 0 1.5rem; }
+    /* Mobile adjustments */
+    @media (max-width: 900px) {
+      section { grid-template-columns: 1fr; gap: 2rem; padding-top: 8rem; }
+      .sidebar { position: static; }
+      h1 { font-size: 36px; }
       .nav-links { display: none; }
-      section { padding: 8rem 1.5rem 4rem; }
-      .reflection-container { padding: 2.5rem 1.5rem; }
-      h1 { font-size: 32px; }
     }
   </style>
 </head>
@@ -60,33 +57,59 @@
   </nav>
 
   <section>
-    <div class="reflection-container">
-      <span class="section-label">Final Synthesis</span>
+    <div class="sidebar">
+      <span class="section-num">06 — Synthesis</span>
       <h1>Professional Reflection</h1>
+    </div>
+
+    <div class="content-area">
+      <p style="font-size: 20px; color: var(--ink); line-height: 1.6;">
+        When I began this program, I was a practitioner with fifteen years of experience and a great deal of intuition about what good teaching looked like.
+      </p>
       
-      <p class="intro-lead">When I began this program, I was a practitioner with fifteen years of experience and a great deal of intuition about what good teaching looked like.</p>
-      
-      <p>I knew how to connect with learners, how to break down complex tasks, and how to meet people where they were. What I did not yet have was a theoretical framework for understanding why those instincts worked, or a rigorous vocabulary for translating them into intentional design. This program gave me that, and the growth has been more significant than I anticipated.</p>
+      <p>
+        I knew how to connect with learners, how to break down complex tasks, and how to meet people where they were. What I did not yet have was a theoretical framework for understanding why those instincts worked, or a rigorous vocabulary for translating them into intentional design. This program gave me that, and the growth has been more significant than I anticipated.
+      </p>
 
       <h2>Evolving Practice</h2>
-      <p>My understanding of educational technology has undergone the most visible shift. I entered this program viewing technology primarily as a practical tool: useful when available, worked around when not. I emerged with a far more critical and intentional lens. I now know what to look for when exploring or evaluating a new tool, and I ask different questions than I used to.</p>
-      <p>Rather than simply asking whether a tool works, I ask who it works for, who it might exclude, and whether it upholds the conditions of autonomy, safety, and equity that I believe are essential to learning.</p>
-      <p>This shift was not abstract. It was shaped by the realities of my practice, where many learners access services on a smartphone with limited data, where Microsoft Word is inaccessible without a paid license, and where AI-driven resume screening tools can automate discrimination against the very people I am trying to support. Technology, I have come to understand, is never neutral. It either opens doors or closes them, and it is my responsibility as an educator and designer to know the difference.</p>
+      <p>
+        My understanding of educational technology has undergone the most visible shift. I entered this program viewing technology primarily as a practical tool: useful when available, worked around when not. I emerged with a far more critical and intentional lens. I now know what to look for when exploring or evaluating a new tool, and I ask different questions than I used to.
+      </p>
+      <p>
+        Rather than simply asking whether a tool works, I ask who it works for, who it might exclude, and whether it upholds the conditions of autonomy, safety, and equity that I believe are essential to learning.
+      </p>
+      <p>
+        This shift was not abstract. It was shaped by the realities of my practice, where many learners access services on a smartphone with limited data, where Microsoft Word is inaccessible without a paid license, and where AI-driven resume screening tools can automate discrimination against the very people I am trying to support. Technology, I have come to understand, is never neutral. It either opens doors or closes them, and it is my responsibility as an educator and designer to know the difference.
+      </p>
 
       <h2>Designing for Diverse Learners</h2>
-      <p>The most meaningful growth I experienced throughout this program was in my understanding of Universal Design for Learning. I entered knowing that good design should be flexible and inclusive. I now know how to build that flexibility in deliberately, from the very beginning of the design process. Multiple means of representation, multiple pathways to engagement, and multiple options for demonstrating learning are no longer abstract principles for me; they are practical tools I reach for when making real design decisions.</p>
-      <p>I have also developed a deeper understanding of what accessibility truly means. It goes far beyond physical accommodations or technical compliance with guidelines. It encompasses language, cognitive load, digital literacy, and the psychological safety required to make mistakes and keep going. Designing for diverse learners means designing for the full range of human experience that learners bring into the room, including trauma, systemic barriers, and the enormous cognitive weight of navigating difficult circumstances while simultaneously trying to learn.</p>
+      <p>
+        The most meaningful growth I experienced throughout this program was in my understanding of Universal Design for Learning. I entered knowing that good design should be flexible and inclusive. I now know how to build that flexibility in deliberately, from the very beginning of the design process.
+      </p>
+      <p>
+        I have also developed a deeper understanding of what accessibility truly means. It goes far beyond physical accommodations or technical compliance with guidelines. It encompasses language, cognitive load, digital literacy, and the psychological safety required to make mistakes and keep going. Designing for diverse learners means designing for the full range of human experience that learners bring into the room.
+      </p>
 
       <h2>Key Program Insights</h2>
-      <p>One of the most valuable shifts in my thinking has been moving from a deficit lens to a design lens. Early in my career, I sometimes framed inaccessibility as a learner problem. This program helped me understand it consistently as a design problem. When a learner cannot engage with a tool or a resource, the question is not what is wrong with the learner; it is what the design failed to account for.</p>
-      <p>I have also genuinely embraced a growth mindset in ways I did not expect. I pushed myself outside my comfort zone throughout this program, including developing basic HTML coding skills, a capability I would not have imagined pursuing when I started. My thinking has shifted from wondering how I could ever do something to asking how I will learn to make it work. That shift matters to me personally, and it also makes me a more credible and empathetic educator, because I am actively modeling the kind of learning I ask of my students.</p>
+      <p>
+        One of the most valuable shifts in my thinking has been moving from a deficit lens to a design lens. Early in my career, I sometimes framed inaccessibility as a learner problem. This program helped me understand it consistently as a design problem. When a learner cannot engage with a tool or a resource, the question is not what is wrong with the learner; it is what the design failed to account for.
+      </p>
+      <p>
+        I have also genuinely embraced a growth mindset in ways I did not expect. I pushed myself outside my comfort zone throughout this program, including developing basic HTML coding skills, a capability I would not have imagined pursuing when I started.
+      </p>
 
       <h2>Professional Identity</h2>
-      <p>This portfolio is the most honest representation of who I am as an educator and designer that I have produced. It holds together the practitioner and the scholar, the employment counsellor and the post-secondary instructor, the lifelong learner and the person who has spent fifteen years helping others learn. It reflects a career built at the intersection of equity, human development, and education, and it demonstrates that my values and my practice have always been aligned, even before I had the language to articulate why.</p>
+      <p>
+        This portfolio is the most honest representation of who I am as an educator and designer that I have produced. It holds together the practitioner and the scholar, the employment counsellor and the post-secondary instructor, the lifelong learner and the person who has spent fifteen years helping others learn.
+      </p>
 
       <h2>Looking Forward</h2>
-      <p>As I move forward, I am carrying this foundation into every context in which I work, whether that is post-secondary teaching, community education, or organizational learning and development. I aim to continue expanding my experience with authoring and facilitation tools, to deepen my practice with accessibility standards, and to design and deliver learning experiences that connect directly to the performance and growth outcomes that matter most to learners and the organizations they are part of.</p>
-      <p>Most importantly, I will continue to see myself as a learner. That is, perhaps, the most important thing this program has reinforced. The best educators and learning and development professionals are not those who have all the answers; they are the ones who remain genuinely curious, willing to be challenged, and committed to growing alongside the people they serve.</p>
+      <p>
+        As I move forward, I am carrying this foundation into every context in which I work, whether that is post-secondary teaching, community education, or organizational learning and development. I aim to continue expanding my experience with authoring and facilitation tools and to design learning experiences that connect directly to the growth outcomes that matter most to learners.
+      </p>
+      <p>
+        Most importantly, I will continue to see myself as a learner. The best educators and learning and development professionals are not those who have all the answers; they are the ones who remain genuinely curious, willing to be challenged, and committed to growing alongside the people they serve.
+      </p>
     </div>
   </section>
 
