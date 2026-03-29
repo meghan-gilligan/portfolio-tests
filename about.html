@@ -14,55 +14,56 @@
       --ink-soft: #4A4640;
       --ink-muted: #8C887F;
       --accent: #7B6E5D;
+      --accent-warm: #A08B6E;
       --rule: #DDD8CF;
       --nav-height: 72px;
       --header-font: 'Montserrat', sans-serif;
       --body-font: 'DM Sans', sans-serif;
     }
-    
-    body { 
-      font-family: var(--body-font); 
-      background: var(--cream); 
-      color: var(--ink); 
-      font-size: 17px; 
-      line-height: 1.8; 
+ 
+    body {
+      font-family: var(--body-font);
+      background: var(--cream);
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.8;
       -webkit-font-smoothing: antialiased;
     }
-
+ 
     /* ── NAV ── */
-    nav { 
-      position: fixed; 
-      top: 0; left: 0; right: 0; 
-      height: var(--nav-height); 
-      background: rgba(247, 244, 239, 0.92); 
-      backdrop-filter: blur(12px); 
-      border-bottom: 1px solid var(--rule); 
-      display: flex; 
-      align-items: center; 
-      justify-content: space-between; 
-      padding: 0 3rem; 
-      z-index: 100; 
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-height);
+      background: rgba(247, 244, 239, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      z-index: 100;
     }
-
-    .nav-name { 
-      font-family: var(--header-font); 
-      font-size: 18px; 
-      font-weight: 700; 
-      color: var(--ink); 
-      text-decoration: none; 
+ 
+    .nav-name {
+      font-family: var(--header-font);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
     }
-
+ 
     .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { 
-      font-size: 12px; 
-      letter-spacing: 0.1em; 
-      text-transform: uppercase; 
-      color: var(--ink-soft); 
-      text-decoration: none; 
+    .nav-links a {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      text-decoration: none;
       transition: color 0.2s ease;
     }
     .nav-links a:hover { color: var(--accent); }
-
+ 
     /* ── MOBILE MENU TOGGLE ── */
     .menu-toggle {
       display: none;
@@ -76,51 +77,76 @@
       padding: 0;
       z-index: 101;
     }
-
+ 
     .menu-toggle span {
       width: 100%;
       height: 2px;
       background-color: var(--ink);
       transition: all 0.3s ease;
     }
-    
-    section { 
-      padding: 10rem 2rem 6rem; 
-      max-width: 720px; 
-      margin: 0 auto; 
-      min-height: 80vh; 
+ 
+    /* ── MAIN CONTENT ── */
+    section {
+      padding: 10rem 3rem 6rem;
+      max-width: 720px;
+      margin: 0 auto;
+      min-height: 80vh;
     }
-    
-    .label {
-      font-size: 11px; 
+ 
+    .section-num {
+      font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.15em;
-      text-transform: uppercase; 
+      text-transform: uppercase;
       color: var(--ink-muted);
       margin-bottom: 1rem;
       display: block;
     }
-
-    h2 { 
-      font-family: var(--header-font); 
-      font-size: 36px; 
-      line-height: 1.2;
-      margin-bottom: 3rem; 
+ 
+    h1 {
+      font-family: var(--header-font);
+      font-size: 52px;
+      line-height: 1.1;
+      margin-bottom: 3rem;
       color: var(--ink);
+      font-weight: 700;
     }
-
-    .content-paragraph { 
-      color: var(--ink-soft); 
-      margin-bottom: 2rem; 
+ 
+    /* Lead sentence matching reflection page style */
+    .lead-sentence {
+      font-size: 20px;
+      line-height: 1.6;
+      color: var(--ink);
+      margin-bottom: 3rem;
+      font-weight: 400;
     }
-
+ 
+    /* Section subheadings matching reflection page style */
+    .content-area h2 {
+      font-family: var(--header-font);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-warm);
+      margin: 4rem 0 1.5rem;
+      border-top: 1px solid var(--rule);
+      padding-top: 2rem;
+    }
+ 
+    .content-area p {
+      font-size: 16px;
+      color: var(--ink-soft);
+      margin-bottom: 2rem;
+    }
+ 
+    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 0 1.5rem; }
-      
+ 
       .menu-toggle { display: flex; }
-
-      .nav-links { 
-        display: none; 
+ 
+      .nav-links {
+        display: none;
         flex-direction: column;
         position: absolute;
         top: var(--nav-height);
@@ -133,74 +159,83 @@
         text-align: center;
         box-shadow: 0 10px 20px rgba(0,0,0,0.05);
       }
-
+ 
       .nav-links.active { display: flex; }
-
+ 
       .menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
       .menu-toggle.active span:nth-child(2) { opacity: 0; }
       .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
+ 
       section { padding: 7rem 1.5rem 4rem; }
-      h2 { font-size: 28px; }
+      h1 { font-size: 36px; }
+      .lead-sentence { font-size: 18px; }
     }
-
-    footer { 
-      padding: 4rem 3rem; 
-      background: var(--warm-white); 
-      text-align: center; 
-      border-top: 1px solid var(--rule); 
+ 
+    footer {
+      padding: 4rem 3rem;
+      background: var(--warm-white);
+      text-align: center;
+      border-top: 1px solid var(--rule);
     }
   </style>
 </head>
 <body>
   <nav>
     <a class="nav-name" href="index.html">Meghan Gilligan</a>
-    
+ 
     <button class="menu-toggle" id="mobile-menu" aria-label="Open Menu">
       <span></span>
       <span></span>
       <span></span>
     </button>
-
+ 
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
       <li><a href="philosophy.html">Philosophy</a></li>
       <li><a href="experience.html">Experience</a></li>
       <li><a href="projects.html">Projects</a></li>
+      <li><a href="teaching.html">Teaching</a></li>
       <li><a href="reflection.html">Reflection</a></li>
     </ul>
   </nav>
-
+ 
   <section>
-    <span class="label">01 — About</span>
-    <h2>A practitioner who designs for the person</h2>
-    
-    <div class="content-wrapper">
-      <p class="content-paragraph">I work at the intersection of adult learning, instructional design, and human development, supporting people as they navigate transitions into work, education, and professional practice. With over fifteen years of experience spanning employment counselling, career coaching, field placement supervision, and post-secondary teaching, I bring both depth of practice and a strong theoretical grounding in adult learning to every context in which I work.</p>
-
-      <p class="content-paragraph">I am a graduate of the Durham College Social Service Worker program and have built a career that has taken me from facilitating employability workshops in secondary schools, to supporting individuals in the community through Employment Services, to teaching post-secondary students in the very program from which I graduated. That last experience was one of the most rewarding of my career and what inspired me to pursue a Bachelor of Arts in Educational Studies, specializing in Adult Learning with Technology. My undergraduate degree gave me language and theoretical grounding for what I had been doing intuitively for years. I now approach instructional and learning design with both practice and principle, drawing on frameworks such as backward design, Universal Design for Learning, and experiential learning theory.</p>
-
-      <p class="content-paragraph">Equity is foundational to everything I do. My learners have included individuals with low literacy, learners navigating systemic poverty, internationally trained professionals, newcomers to Canada, and people managing significant mental health challenges. These experiences have taught me that good learning design begins with deep respect for the learner, and that equity requires thoughtful, intentional design choices. I am committed to creating inclusive, accessible learning environments where adult learners feel seen, valued, and empowered to apply new skills to their lives and careers.</p>
-
-      <p class="content-paragraph">My professional interests lie in learning and development roles where I can design and facilitate meaningful experiences for adult learners, whether in post-secondary, community, or organizational contexts. I am drawn to work that takes accessibility and inclusion seriously, connects learning directly to performance and growth, and integrates andragogical principles with purposeful, evidence-based design.</p>
-
-      <p class="content-paragraph">This portfolio reflects my growth as an educator and educational designer over the course of my undergraduate degree. Visitors will find my teaching philosophy, a professional reflection on my learning context and design practice, artifacts I have created, and a discussion of my approach to assessment, educational technology, and inclusive design. Together, these sections tell the story of a practitioner who is committed to lifelong learning and to creating meaningful, equitable experiences for adult learners.</p>
+    <span class="section-num">01 — About</span>
+    <h1>A practitioner who designs for the person</h1>
+ 
+    <div class="content-area">
+      <p class="lead-sentence">I work at the intersection of adult learning, instructional design, and human development, supporting people as they navigate transitions into work, education, and professional practice.</p>
+ 
+      <p>With over fifteen years of experience spanning employment counselling, career coaching, field placement supervision, and post-secondary teaching, I bring both depth of practice and a strong theoretical grounding in adult learning to every context in which I work.</p>
+ 
+      <h2>Background</h2>
+      <p>I am a graduate of the Durham College Social Service Worker program and have built a career that has taken me from facilitating employability workshops in secondary schools, to supporting individuals in the community through Employment Services, to teaching post-secondary students in the very program from which I graduated. That last experience was one of the most rewarding of my career and what inspired me to pursue a Bachelor of Arts in Educational Studies, specializing in Adult Learning with Technology.</p>
+      <p>My undergraduate degree gave me language and theoretical grounding for what I had been doing intuitively for years. I now approach instructional and learning design with both practice and principle, drawing on frameworks such as backward design, Universal Design for Learning, and experiential learning theory.</p>
+ 
+      <h2>Values</h2>
+      <p>Equity is foundational to everything I do. My learners have included individuals with low literacy, learners navigating systemic poverty, internationally trained professionals, newcomers to Canada, and people managing significant mental health challenges. These experiences have taught me that good learning design begins with deep respect for the learner, and that equity requires thoughtful, intentional design choices. I am committed to creating inclusive, accessible learning environments where adult learners feel seen, valued, and empowered to apply new skills to their lives and careers.</p>
+ 
+      <h2>Professional Interests</h2>
+      <p>My professional interests lie in learning and development roles where I can design and facilitate meaningful experiences for adult learners, whether in post-secondary, community, or organizational contexts. I am drawn to work that takes accessibility and inclusion seriously, connects learning directly to performance and growth, and integrates andragogical principles with purposeful, evidence-based design.</p>
+ 
+      <h2>This Portfolio</h2>
+      <p>This portfolio reflects my growth as an educator and educational designer over the course of my undergraduate degree. Visitors will find my teaching philosophy, a professional reflection on my learning context and design practice, artifacts I have created, and a discussion of my approach to assessment, educational technology, and inclusive design. Together, these sections tell the story of a practitioner who is committed to lifelong learning and to creating meaningful, equitable experiences for adult learners.</p>
     </div>
   </section>
-
+ 
   <footer>
     <p style="font-size: 12px; color: var(--ink-muted);">&copy; 2026 Meghan Gilligan</p>
   </footer>
-
+ 
   <script>
     const menuToggle = document.getElementById('mobile-menu');
     const navLinks = document.querySelector('.nav-links');
-
+ 
     menuToggle.addEventListener('click', () => {
       menuToggle.classList.toggle('active');
       navLinks.classList.toggle('active');
     });
-
+ 
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
         menuToggle.classList.remove('active');
