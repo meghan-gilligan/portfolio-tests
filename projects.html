@@ -21,14 +21,14 @@
       --header-font: 'Montserrat', sans-serif;
       --body-font: 'DM Sans', sans-serif;
     }
- 
+
     body {
       font-family: var(--body-font);
       background: var(--cream);
       color: var(--ink);
       line-height: 1.7;
     }
- 
+
     /* ── NAV ── */
     nav {
       position: fixed;
@@ -44,7 +44,7 @@
       padding: 0 2.5rem;
       z-index: 100;
     }
- 
+
     .nav-name {
       font-family: var(--header-font);
       font-size: 16px;
@@ -53,9 +53,9 @@
       text-decoration: none;
       letter-spacing: 0.02em;
     }
- 
+
     .nav-links { display: flex; gap: 2rem; list-style: none; }
- 
+
     .nav-links a {
       font-size: 11px;
       letter-spacing: 0.1em;
@@ -64,9 +64,9 @@
       text-decoration: none;
       transition: color 0.2s;
     }
- 
+
     .nav-links a:hover { color: var(--ink); }
- 
+
     .menu-toggle {
       display: none;
       flex-direction: column;
@@ -75,13 +75,13 @@
       background: none; border: none;
       cursor: pointer; padding: 0; z-index: 101;
     }
- 
+
     .menu-toggle span {
       width: 100%; height: 2px;
       background-color: var(--ink);
       transition: all 0.3s ease;
     }
- 
+
     /* ── HERO ── */
     .hero {
       position: relative;
@@ -91,13 +91,13 @@
       align-items: flex-end;
       margin-top: var(--nav-height);
     }
- 
+
     .hero-img-fallback {
       position: absolute;
       inset: 0;
       background: linear-gradient(135deg, #3A4E28 0%, #5A7A3A 40%, #8BA86A 70%, #C5D8A0 100%);
     }
- 
+
     .hero-img {
       position: absolute;
       inset: 0;
@@ -107,19 +107,19 @@
       object-position: center 50%;
       filter: brightness(0.85) saturate(0.88);
     }
- 
+
     .hero-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(to bottom, rgba(50,65,35,0.10) 0%, rgba(30,40,20,0.55) 100%);
     }
- 
+
     .hero-text {
       position: relative;
       z-index: 2;
       padding: 0 2.5rem 2rem;
     }
- 
+
     .hero-eyebrow {
       font-size: 10px;
       letter-spacing: 0.18em;
@@ -129,7 +129,7 @@
       margin-bottom: 0.4rem;
       display: block;
     }
- 
+
     .hero-title {
       font-family: var(--header-font);
       font-size: 26px;
@@ -138,18 +138,18 @@
       line-height: 1.2;
       margin: 0;
     }
- 
+
     /* ── SECTION ── */
     section {
       padding: 2.5rem 2.5rem 5rem;
       max-width: 1100px;
       margin: 0 auto;
     }
- 
+
     .section-header {
       margin-bottom: 2.5rem;
     }
- 
+
     .section-eyebrow {
       font-size: 10px;
       text-transform: uppercase;
@@ -157,14 +157,14 @@
       color: var(--ink-muted);
       font-weight: 500;
     }
- 
+
     .section-title {
       font-family: var(--header-font);
       font-size: 28px;
       margin-top: 0.5rem;
       color: var(--ink);
     }
- 
+
     /* ── PROJECT GRID ── */
     .project-grid {
       display: grid;
@@ -173,14 +173,14 @@
       background: var(--rule);
       border: 1px solid var(--rule);
     }
- 
+
     .project-card {
       background: var(--warm-white);
       padding: 2.5rem;
       display: flex;
       flex-direction: column;
     }
- 
+
     .project-tag {
       font-size: 10px;
       color: var(--accent-warm);
@@ -189,7 +189,7 @@
       font-weight: 500;
       margin-bottom: 0.4rem;
     }
- 
+
     .project-card h3 {
       font-family: var(--header-font);
       font-size: 16px;
@@ -197,7 +197,7 @@
       color: var(--ink);
       margin-bottom: 0.5rem;
     }
- 
+
     .project-desc {
       font-size: 13px;
       color: var(--ink-soft);
@@ -206,7 +206,7 @@
          that wraps to an extra line). This keeps images aligned row-by-row. */
       min-height: 5.5em;
     }
- 
+
     /* ── IMAGE ALIGNMENT ── */
     /* 
       Fixed-height image container ensures all project images 
@@ -220,7 +220,7 @@
       border: 1px solid var(--rule);
       background: #E8EDDF;
     }
- 
+
     .project-image-wrap img {
       width: 100%;
       height: 100%;
@@ -229,7 +229,7 @@
       display: block;
       background: #E8EDDF;
     }
- 
+
     /* Placeholder for cards without an image yet */
     .project-image-placeholder {
       width: 100%;
@@ -241,14 +241,14 @@
       align-items: center;
       justify-content: center;
     }
- 
+
     .project-image-placeholder span {
       font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--ink-muted);
     }
- 
+
     /* ── ANNOTATION BOX ── */
     .annotation-box {
       margin: 1.25rem 0 0;
@@ -256,7 +256,7 @@
       background: rgba(109, 140, 74, 0.04);
       border-left: 2px solid var(--accent-light);
     }
- 
+
     /* Summary toggle */
     summary {
       cursor: pointer;
@@ -270,29 +270,29 @@
       padding: 0.25rem 0; /* vertical breathing room above and below */
       margin-bottom: 0;
     }
- 
+
     summary::-webkit-details-marker { display: none; }
- 
+
     /* Gap between summary and first heading when open */
     details[open] summary {
       margin-bottom: 1rem;
     }
- 
+
     .annotation-text {
       font-size: 13px;
       line-height: 1.65;
       color: var(--ink-soft);
       padding-bottom: 1.25rem; /* controlled bottom space */
     }
- 
+
     .annotation-text p {
       margin-bottom: 0.85rem; /* tighter between paragraphs */
     }
- 
+
     .annotation-text p:last-child {
       margin-bottom: 0; /* no trailing space after last paragraph */
     }
- 
+
     .annotation-text strong {
       color: var(--ink);
       text-transform: uppercase;
@@ -302,7 +302,7 @@
       margin-bottom: 0.2rem;
       margin-top: 0; /* no extra top gap — summary->first strong gap handled above */
     }
- 
+
     /* ── VIEW LINK ── */
     .view-link {
       margin-top: 1.25rem;
@@ -314,9 +314,9 @@
       letter-spacing: 0.05em;
       display: inline-block;
     }
- 
+
     .view-link:hover { color: var(--accent); }
- 
+
     /* ── FOOTER ── */
     footer {
       padding: 2rem 3rem;
@@ -324,13 +324,13 @@
       text-align: center;
       border-top: 1px solid var(--rule);
     }
- 
+
     /* ── MOBILE ── */
     @media (max-width: 768px) {
       nav { padding: 0 1.5rem; }
- 
+
       .menu-toggle { display: flex; }
- 
+
       .nav-links {
         display: none;
         flex-direction: column;
@@ -344,32 +344,32 @@
         text-align: center;
         box-shadow: 0 10px 20px rgba(0,0,0,0.05);
       }
- 
+
       .nav-links.active { display: flex; }
- 
+
       .menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
       .menu-toggle.active span:nth-child(2) { opacity: 0; }
       .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
- 
+
       section { padding: 2rem 1.5rem 3rem; }
       .project-grid { grid-template-columns: 1fr; }
       .hero-title { font-size: 20px; }
       .hero-text { padding: 0 1.5rem 1.5rem; }
     }
- 
+
     .fade-in { opacity: 0; transform: translateY(18px); transition: 0.6s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
- 
+
   <nav>
     <a class="nav-name" href="index.html">Meghan Gilligan</a>
- 
+
     <button class="menu-toggle" id="mobile-menu" aria-label="Open Menu">
       <span></span><span></span><span></span>
     </button>
- 
+
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
       <li><a href="philosophy.html">Philosophy</a></li>
@@ -378,7 +378,7 @@
       <li><a href="reflection.html">Reflection</a></li>
     </ul>
   </nav>
- 
+
   <!-- HERO — uses leaf2.jpg from root folder -->
   <div class="hero">
     <div class="hero-img-fallback"></div>
@@ -389,11 +389,11 @@
       <h2 class="hero-title">Work samples &amp; design projects</h2>
     </div>
   </div>
- 
+
   <section id="projects">
- 
+
     <div class="project-grid fade-in">
- 
+
       <!-- CARD 1 -->
       <div class="project-card">
         <p class="project-tag">eLearning</p>
@@ -415,7 +415,7 @@
         </div>
         <a class="view-link" href="https://lor.instructure.com/resources/994b35127e4e4ce99bafc31ddee122d7?shared" target="_blank">View project →</a>
       </div>
- 
+
       <!-- CARD 2 -->
       <div class="project-card">
         <p class="project-tag">Assessment &amp; Evaluation</p>
@@ -437,7 +437,7 @@
         </div>
         <a class="view-link" href="https://meghan-gilligan.github.io/Self-Assessment-Skills-in-Higher-Education/" target="_blank">View project →</a>
       </div>
- 
+
       <!-- CARD 3 -->
       <div class="project-card">
         <p class="project-tag">Research &amp; Application</p>
@@ -445,7 +445,7 @@
         <p class="project-desc">Authored a research paper and digital resource guide for AI-driven career planning, and showcased it at the <a href="https://education.ontariotechu.ca/cdie/events/cdie-conf-2025.php#tab2-4" target="_blank" style="color: var(--accent-warm); text-decoration: underline; font-weight: 500;">2025 Digital Innovation in Education Conference</a> at Ontario Tech University.</p>
         <div class="project-image-wrap">
           <a href="https://canva.link/97lkhx6jy4r8yh1" target="_blank" rel="noopener noreferrer" style="display:block; height:100%;">
-            <img src="poster.png" alt="AI Tools in Career Planning conference poster" style="width:100%; height:100%; object-fit:cover; object-position:top;" />
+            <img src="poster.png" alt="AI Tools in Career Planning conference poster" />
           </a>
         </div>
         <div class="annotation-box">
@@ -461,7 +461,7 @@
         </div>
         <a class="view-link" href="https://drive.google.com/file/d/1UVpdDqrd9GyubwlaKwMzRB5Vm3EXJOEA/view?usp=drive_link" target="_blank">View project →</a>
       </div>
- 
+
       <!-- CARD 4 -->
       <div class="project-card">
         <p class="project-tag">Educational Technology</p>
@@ -483,7 +483,7 @@
         </div>
         <a class="view-link" href="https://meghan-gilligan.github.io/Thriving-as-an-Adult-Learner/" target="_blank">View project →</a>
       </div>
- 
+
       <!-- CARD 5 -->
       <div class="project-card">
         <p class="project-tag">Instructional Design</p>
@@ -505,7 +505,7 @@
         </div>
         <a class="view-link" href="#">View project →</a>
       </div>
- 
+
       <!-- CARD 6 -->
       <div class="project-card">
         <p class="project-tag">Facilitation</p>
@@ -527,33 +527,33 @@
         </div>
         <a class="view-link" href="#">View project →</a>
       </div>
- 
+
     </div>
   </section>
- 
+
   <footer>
     <p style="font-size: 12px; color: var(--ink-muted);">&copy; 2026 Meghan Gilligan | Educational Studies Portfolio</p>
     <div style="margin-top: 1rem;">
       <a href="mailto:meghan.gilligan@ontariotechu.net" style="text-decoration: none; color: var(--ink); font-size: 11px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">Contact</a>
     </div>
   </footer>
- 
+
   <script>
     const menuToggle = document.getElementById('mobile-menu');
     const navLinks = document.querySelector('.nav-links');
- 
+
     menuToggle.addEventListener('click', () => {
       menuToggle.classList.toggle('active');
       navLinks.classList.toggle('active');
     });
- 
+
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
         menuToggle.classList.remove('active');
         navLinks.classList.remove('active');
       });
     });
- 
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -561,6 +561,6 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   </script>
- 
+
 </body>
 </html>
