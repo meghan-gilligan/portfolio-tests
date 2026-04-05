@@ -202,6 +202,10 @@
       font-size: 13px;
       color: var(--ink-soft);
       margin-bottom: 0;
+      /* Fixed height so image always starts at the same vertical position
+         regardless of how long the description is. 3 lines @ 1.7 line-height
+         ≈ 66px; 4em gives a comfortable buffer for wrapped text. */
+      min-height: 4em;
     }
 
     /* ── IMAGE ALIGNMENT ── */
@@ -248,7 +252,7 @@
     /* ── ANNOTATION BOX ── */
     .annotation-box {
       margin: 1.25rem 0 0;
-      padding: 1.25rem 1.25rem 0;
+      padding: 1rem 1.25rem 1rem;
       background: rgba(109, 140, 74, 0.04);
       border-left: 2px solid var(--accent-light);
     }
@@ -263,13 +267,13 @@
       letter-spacing: 0.08em;
       list-style: none;
       outline: none;
-      padding-bottom: 0;
+      padding: 0.25rem 0; /* vertical breathing room above and below */
       margin-bottom: 0;
     }
 
     summary::-webkit-details-marker { display: none; }
 
-    /* Tighter gap between summary and first heading */
+    /* Gap between summary and first heading when open */
     details[open] summary {
       margin-bottom: 1rem;
     }
