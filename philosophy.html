@@ -8,82 +8,257 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --cream: #F7F4EF;
-      --warm-white: #FDFCFA;
+      --cream: #F4F1EB;
+      --warm-white: #EDE9E0;
       --ink: #1C1A17;
       --ink-soft: #4A4640;
       --ink-muted: #8C887F;
-      --accent: #7B6E5D;
-      --accent-warm: #A08B6E;
-      --rule: #DDD8CF;
-      --botanical-light: #F4F1EC;
-      --botanical-text: #6B7B5E;
-      --nav-height: 72px;
-      --header-font: "Montserrat", sans-serif;
-      --body-font: "DM Sans", sans-serif;
+      --accent: #6D8C4A;
+      --accent-light: #8BA86A;
+      --accent-warm: #7A9A4A;
+      --rule: #C5BFB0;
+      --nav-height: 64px;
+      --header-font: 'Montserrat', sans-serif;
+      --body-font: 'DM Sans', sans-serif;
     }
-    body { font-family: var(--body-font); background: var(--cream); color: var(--ink); font-size: 17px; line-height: 1.8; -webkit-font-smoothing: antialiased; }
 
-    nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height); background: rgba(247,244,239,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; z-index: 100; }
-    .nav-name { font-family: var(--header-font); font-size: 18px; font-weight: 700; color: var(--ink); text-decoration: none; }
+    body {
+      font-family: var(--body-font);
+      background: var(--cream);
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-height);
+      background: rgba(244, 241, 235, 0.93);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      z-index: 100;
+    }
+
+    .nav-name {
+      font-family: var(--header-font);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
     .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; transition: color 0.2s ease; }
-    .nav-links a:hover { color: var(--accent); }
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--ink); }
 
-    .menu-toggle { display: none; flex-direction: column; justify-content: space-between; width: 24px; height: 18px; background: none; border: none; cursor: pointer; padding: 0; z-index: 101; }
-    .menu-toggle span { width: 100%; height: 2px; background-color: var(--ink); transition: all 0.3s ease; }
+    /* ── MOBILE MENU TOGGLE ── */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 18px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 101;
+    }
 
-    section { padding: 10rem 3rem 6rem; max-width: 960px; margin: 0 auto; min-height: 80vh; }
+    .menu-toggle span {
+      width: 100%;
+      height: 2px;
+      background-color: var(--ink);
+      transition: all 0.3s ease;
+    }
 
-    .hero { display: grid; grid-template-columns: 1fr 220px; gap: 3rem; align-items: start; margin-bottom: 4rem; }
-    .hero-photo-col { display: flex; flex-direction: column; align-items: flex-end; padding-top: 0.5rem; gap: 0.75rem; }
-    .hero-photo { width: 200px; height: 200px; object-fit: cover; object-position: center 30%; border-radius: 50%; display: block; filter: saturate(0.85); opacity: 0.88; }
-    .hero-photo-caption { font-size: 14px; color: var(--ink-muted); font-style: italic; text-align: right; line-height: 1.5; }
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      height: 260px;
+      display: flex;
+      align-items: flex-end;
+      margin-top: var(--nav-height);
+    }
 
-    .section-num { font-size: 14px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 1rem; display: block; }
-    h1 { font-family: var(--header-font); font-size: 52px; line-height: 1.1; margin-bottom: 2rem; color: var(--ink); font-weight: 700; }
-    .lead-sentence { font-size: 16px; line-height: 1.8; color: var(--ink-soft); margin-bottom: 1.5rem; font-weight: 400; }
-    .hero-text > p:not(.lead-sentence) { font-size: 16px; color: var(--ink-soft); }
+    .hero-img-fallback {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #2A3820 0%, #3A5228 40%, #6D8C4A 70%, #A8C078 100%);
+    }
 
-    .section-standard { border-top: 1px solid var(--rule); padding-top: 2rem; margin-top: 4rem; }
-    .section-with-aside { display: grid; grid-template-columns: 1fr 110px; gap: 2rem; align-items: start; border-top: 1px solid var(--rule); padding-top: 2rem; margin-top: 4rem; }
-    .section-aside { display: flex; justify-content: center; padding-top: 2.5rem; }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      filter: brightness(0.82) saturate(0.9);
+    }
 
-    .content-area h2 { font-family: var(--header-font); font-size: 14px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent-warm); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
-    .content-area h2::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, #DDD8CF, transparent); }
-    .content-area p { font-size: 16px; color: var(--ink-soft); margin-bottom: 2rem; max-width: 640px; }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(30,45,20,0.10) 0%, rgba(20,35,15,0.58) 100%);
+    }
 
-    .pull-quote { display: flex; align-items: stretch; background: var(--botanical-light); border-radius: 8px; padding: 1.2rem 1.5rem; margin: 1.5rem 0 2rem; max-width: 640px; }
-    .pull-quote-bar { width: 3px; background: #A08B6E; border-radius: 2px; margin-right: 1.2rem; flex-shrink: 0; align-self: stretch; }
-    .pull-quote p { font-size: 16px !important; font-style: italic; line-height: 1.7; color: var(--botanical-text) !important; margin-bottom: 0 !important; }
+    .hero-text {
+      position: relative;
+      z-index: 2;
+      padding: 0 2.5rem 2rem;
+    }
 
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #C8D9A8;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .hero-title {
+      font-family: var(--header-font);
+      font-size: 26px;
+      font-weight: 700;
+      color: #F0EDE6;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    /* ── MAIN CONTENT ── */
+    section {
+      padding: 3.5rem 2.5rem 6rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .lead-sentence {
+      font-size: 19px;
+      line-height: 1.65;
+      color: var(--ink);
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    .content-area p {
+      font-size: 15px;
+      color: var(--ink-soft);
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .content-area p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Section headings — consistent with about/reflection */
+    .content-area h2 {
+      font-family: var(--header-font);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-warm);
+      margin: 3.5rem 0 1.25rem;
+      border-top: 1px solid var(--rule);
+      padding-top: 1.75rem;
+    }
+
+    /* ── PULL QUOTE — kept from original Core Beliefs section ── */
+    .pull-quote {
+      display: flex;
+      align-items: stretch;
+      background: rgba(109, 140, 74, 0.05);
+      border-radius: 4px;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0 1.5rem;
+    }
+
+    .pull-quote-bar {
+      width: 2px;
+      background: var(--accent-light);
+      border-radius: 2px;
+      margin-right: 1.1rem;
+      flex-shrink: 0;
+      align-self: stretch;
+    }
+
+    .pull-quote p {
+      font-size: 15px !important;
+      font-style: italic;
+      line-height: 1.75;
+      color: var(--ink-soft) !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 0 1.5rem; }
+
       .menu-toggle { display: flex; }
-      .nav-links { display: none; flex-direction: column; position: absolute; top: var(--nav-height); left: 0; right: 0; background: var(--cream); padding: 3rem 1.5rem; border-bottom: 1px solid var(--rule); gap: 2rem; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: var(--nav-height);
+        left: 0; right: 0;
+        background: var(--cream);
+        padding: 3rem 1.5rem;
+        border-bottom: 1px solid var(--rule);
+        gap: 2rem;
+        text-align: center;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      }
+
       .nav-links.active { display: flex; }
+
       .menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
       .menu-toggle.active span:nth-child(2) { opacity: 0; }
       .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-      section { padding: 7rem 1.5rem 4rem; }
-      h1 { font-size: 36px; }
-      .lead-sentence { font-size: 18px; }
-      .hero { grid-template-columns: 1fr; }
-      .hero-photo-col { display: none; }
-      .section-with-aside { grid-template-columns: 1fr; }
-      .section-aside { display: none; }
+
+      section { padding: 2.5rem 1.5rem 4rem; }
+      .hero-title { font-size: 20px; }
+      .hero-text { padding: 0 1.5rem 1.5rem; }
+      .lead-sentence { font-size: 17px; }
     }
 
-    footer { padding: 4rem 3rem; background: var(--warm-white); text-align: center; border-top: 1px solid var(--rule); }
+    footer {
+      padding: 2rem 3rem;
+      background: var(--warm-white);
+      text-align: center;
+      border-top: 1px solid var(--rule);
+    }
   </style>
 </head>
 <body>
 
   <nav>
     <a class="nav-name" href="index.html">Meghan Gilligan</a>
+
     <button class="menu-toggle" id="mobile-menu" aria-label="Open Menu">
       <span></span><span></span><span></span>
     </button>
+
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
       <li><a href="philosophy.html">Philosophy</a></li>
@@ -93,156 +268,81 @@
     </ul>
   </nav>
 
-  <section>
-
-    <div class="hero">
-      <div class="hero-text">
-        <span class="section-num">Philosophy</span>
-        <h1>Teaching Philosophy</h1>
-        <p class="lead-sentence">My teaching philosophy reflects over fifteen years of working at the intersection of education, employment, and human development.</p>
-        <p>It has evolved continuously through practice, and most significantly over the course of my undergraduate degree in educational studies, as I have gained theoretical grounding for what I have been doing intuitively. At its core, my philosophy is built on the belief that adult learning must be transformative, which is only possible when educators and facilitators design with respect for the whole person.</p>
-      </div>
-      <div class="hero-photo-col">
-        <img class="hero-photo" src="hoya.jpg" alt="Hoya flowers from my garden" />
-
-      </div>
+  <!-- HERO — uses leaf4.jpg from root folder -->
+  <div class="hero">
+    <div class="hero-img-fallback"></div>
+    <img class="hero-img" src="leaf4.jpg" alt="Close-up macro photograph of a tropical leaf" />
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <span class="hero-eyebrow">Philosophy</span>
+      <h2 class="hero-title">Teaching Philosophy</h2>
     </div>
+  </div>
 
+  <section>
     <div class="content-area">
 
-      <div class="section-standard">
-        <h2>Core Beliefs About Learning</h2>
-        <div class="pull-quote">
-          <div class="pull-quote-bar"></div>
-          <p>Learning is not passive absorption. It happens when individuals actively construct knowledge through meaningful engagement with experience, prior knowledge, and authentic goals.</p>
-        </div>
-        <p>Before beginning my career, I understood learning primarily as information transfer. If I explained clearly, provided good resources, and broke tasks into manageable steps, I believed learners would succeed. Working directly with adults navigating significant life transitions challenged that assumption. I have watched learners manage competing pressures: re-entering the workforce after years away, rebuilding professional identity after credential loss, or developing new skills while managing the uncertainty of change.</p>
-        <p>This constructivist understanding is the foundation of everything I do. For learning to be transformative, it requires three conditions: autonomy, safety, and relevance. When any one of these is absent, engagement collapses and transfer to real-world practice becomes unlikely. My role as a facilitator and designer is to create conditions where all three can coexist, regardless of the context or setting.</p>
+      <p class="lead-sentence">My teaching philosophy reflects over fifteen years of working at the intersection of education, employment, and human development.</p>
+
+      <p>It has evolved continuously through practice, and most significantly over the course of my undergraduate degree in educational studies, as I have gained theoretical grounding for what I have been doing intuitively. At its core, my philosophy is built on the belief that adult learning must be transformative, which is only possible when educators and facilitators design with respect for the whole person.</p>
+
+      <h2>Core Beliefs About Learning</h2>
+
+      <div class="pull-quote">
+        <div class="pull-quote-bar"></div>
+        <p>Learning is not passive absorption. It happens when individuals actively construct knowledge through meaningful engagement with experience, prior knowledge, and authentic goals.</p>
       </div>
 
-      <!-- Role as Facilitator — fern 1: upright pinnate frond -->
-      <div class="section-with-aside">
-        <div>
-          <h2>Role as the Facilitator</h2>
-          <p>I see myself as a facilitator of autonomous learning rather than a transmitter of knowledge. This means that rather than presenting content and expecting absorption, I design experiences that invite participation, dialogue, and reflection. I have learned to read a room, to notice when energy shifts or body language changes, when confusion is setting in, or when a participant's prior experience is an asset waiting to be drawn out, and to adapt my approach accordingly.</p>
-          <p>This is particularly important when working with seasoned adult learners who bring significant professional experience into the room. These learners are not blank slates. They have established frameworks, strong opinions shaped by real practice, and a low tolerance for content that does not connect to their work. Meeting them effectively means beginning with their experience, building on what they already know, and designing learning that feels immediately relevant and applicable. Andragogy and Self-Directed Learning principles provide a theoretical framework for what I had already learned through practice: adults engage most deeply when they exercise agency over their learning, connecting new concepts directly to their goals and professional contexts.</p>
-        </div>
-        <div class="section-aside" aria-hidden="true">
-          <svg width="90" height="175" viewBox="0 0 90 175" fill="none" style="opacity:0.27;">
-            <path d="M52 170 Q50 145 46 118 Q40 90 32 65 Q24 40 16 18 Q12 8 14 2" stroke="#3d6b3d" stroke-width="2" stroke-linecap="round"/>
-            <path d="M46 118 Q30 109 22 115 Q14 123 20 131 Q30 136 46 127" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.8"/>
-            <path d="M46 118 Q60 109 68 115 Q76 123 68 131 Q58 135 46 127" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.8"/>
-            <path d="M42 100 Q26 91 18 97 Q10 105 16 113 Q26 118 42 109" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.75"/>
-            <path d="M42 100 Q56 91 64 97 Q72 105 64 113 Q54 117 42 109" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.75"/>
-            <path d="M38 83 Q22 74 15 80 Q8 88 14 96 Q24 100 38 91" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.7"/>
-            <path d="M38 83 Q52 74 59 80 Q66 88 58 96 Q49 99 38 91" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.7"/>
-            <path d="M34 67 Q19 58 13 64 Q7 72 13 79 Q22 83 34 74" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.65"/>
-            <path d="M34 67 Q48 58 54 64 Q60 72 52 79 Q44 82 34 74" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.65"/>
-            <path d="M28 52 Q15 44 10 50 Q5 58 10 64 Q18 67 28 59" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.6"/>
-            <path d="M28 52 Q40 44 46 50 Q51 58 44 64 Q37 67 28 59" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.6"/>
-            <path d="M23 38 Q12 31 8 37 Q4 44 9 49 Q16 52 23 45" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.55"/>
-            <path d="M23 38 Q33 31 38 37 Q42 44 36 49 Q29 52 23 45" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.55"/>
-            <path d="M19 25 Q10 19 7 24 Q4 30 9 35 Q15 37 19 31" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.5"/>
-            <path d="M19 25 Q27 19 31 24 Q34 30 29 35 Q22 37 19 31" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.5"/>
-            <path d="M16 13 Q9 8 7 13 Q5 18 9 22 Q14 24 16 19" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.45"/>
-            <path d="M16 13 Q22 8 25 13 Q27 18 23 22 Q18 24 16 19" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.45"/>
-          </svg>
-        </div>
-      </div>
+      <p>Before beginning my career, I understood learning primarily as information transfer. If I explained clearly, provided good resources, and broke tasks into manageable steps, I believed learners would succeed. Working directly with adults navigating significant life transitions challenged that assumption. I have watched learners manage competing pressures: re-entering the workforce after years away, rebuilding professional identity after credential loss, or developing new skills while managing the uncertainty of change.</p>
+      <p>This constructivist understanding is the foundation of everything I do. For learning to be transformative, it requires three conditions: autonomy, safety, and relevance. When any one of these is absent, engagement collapses and transfer to real-world practice becomes unlikely. My role as a facilitator and designer is to create conditions where all three can coexist, regardless of the context or setting.</p>
 
-      <div class="section-standard">
-        <h2>Needs Analysis and Intentional Design</h2>
-        <p>Effective learning design begins before facilitation. It starts with understanding who the learners are, what they already know, where the gaps are, and what outcomes matter most. In my roles, I assess learner needs at both the individual and group level, identifying gaps in knowledge, skill, and confidence, and designing targeted learning solutions to close them. Whether working one-on-one with a client navigating a career transition or designing a workshop for a group with diverse experience levels, I approach design as an evidence-based problem-solving process tailored to the learner population.</p>
-        <p>My undergraduate degree gave language and structure to what I had long been doing intuitively, and I now draw on frameworks such as backward design, which begins with clearly defined outcomes and works backward to identify the learning experiences and assessments needed to get there. This approach ensures that every design decision is purposeful and that learning solutions connect directly to the performance outcomes they are intended to support.</p>
-      </div>
+      <h2>Role as the Facilitator</h2>
+      <p>I see myself as a facilitator of autonomous learning rather than a transmitter of knowledge. This means that rather than presenting content and expecting absorption, I design experiences that invite participation, dialogue, and reflection. I have learned to read a room, to notice when energy shifts or body language changes, when confusion is setting in, or when a participant's prior experience is an asset waiting to be drawn out, and to adapt my approach accordingly.</p>
+      <p>This is particularly important when working with seasoned adult learners who bring significant professional experience into the room. These learners are not blank slates. They have established frameworks, strong opinions shaped by real practice, and a low tolerance for content that does not connect to their work. Meeting them effectively means beginning with their experience, building on what they already know, and designing learning that feels immediately relevant and applicable. Andragogy and Self-Directed Learning principles provide a theoretical framework for what I had already learned through practice: adults engage most deeply when they exercise agency over their learning, connecting new concepts directly to their goals and professional contexts.</p>
 
-      <!-- Program Evaluation — fern 2: leaning right frond -->
-      <div class="section-with-aside">
-        <div>
-          <h2>Program Evaluation and Continuous Improvement</h2>
-          <p>Design does not end at delivery; facilitators and designers have a responsibility to evaluate whether learning is actually working, and to use that information to improve. In my practice, this looks like structured reflection activities that surface what participants are taking away, feedback loops that inform future iterations of a program, and ongoing attention to whether the conditions for learning are being met.</p>
-          <p>My commitment to evaluation is anchored in the same constructivist principles that guide my facilitation. Since learning is a process of knowledge construction, assessment and evaluation must make that process visible. I look for evidence beyond content retention, such as changed thinking, increased confidence, and the capacity to apply new skills in real contexts. These are the outcomes that matter most, and they require ongoing attention beyond the final session.</p>
-        </div>
-        <div class="section-aside" aria-hidden="true">
-          <svg width="90" height="175" viewBox="0 0 90 175" fill="none" style="opacity:0.25;">
-            <path d="M38 170 Q40 145 44 118 Q50 90 58 65 Q66 40 74 18 Q78 8 76 2" stroke="#3d6b3d" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M44 118 Q28 109 20 115 Q12 123 18 131 Q28 136 44 127" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.8"/>
-            <path d="M44 118 Q58 109 66 115 Q74 123 66 131 Q56 135 44 127" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.8"/>
-            <path d="M48 101 Q33 92 25 98 Q17 106 23 114 Q33 118 48 109" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.75"/>
-            <path d="M48 101 Q62 92 70 98 Q78 106 70 114 Q60 117 48 109" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.75"/>
-            <path d="M52 84 Q37 75 30 81 Q23 89 29 96 Q38 100 52 91" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.7"/>
-            <path d="M52 84 Q66 75 73 81 Q80 89 72 96 Q63 99 52 91" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.7"/>
-            <path d="M56 68 Q42 59 36 65 Q30 73 36 80 Q44 83 56 75" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.65"/>
-            <path d="M56 68 Q69 59 75 65 Q81 73 74 80 Q65 83 56 75" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.65"/>
-            <path d="M61 52 Q48 44 43 50 Q38 58 44 64 Q52 67 61 60" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.6"/>
-            <path d="M61 52 Q72 44 77 50 Q82 58 75 64 Q67 67 61 60" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.6"/>
-            <path d="M65 38 Q54 31 50 37 Q46 44 51 49 Q58 52 65 46" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.55"/>
-            <path d="M65 38 Q75 31 79 37 Q83 44 77 49 Q70 52 65 46" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.55"/>
-            <path d="M70 25 Q61 19 58 24 Q55 30 59 35 Q65 38 70 32" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.5"/>
-            <path d="M70 25 Q78 19 81 24 Q84 30 80 35 Q74 38 70 32" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.5"/>
-            <path d="M74 13 Q68 8 66 13 Q64 18 68 22 Q72 24 74 18" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.45"/>
-            <path d="M74 13 Q80 8 82 13 Q84 18 80 22 Q76 24 74 18" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.45"/>
-          </svg>
-        </div>
-      </div>
+      <h2>Needs Analysis and Intentional Design</h2>
+      <p>Effective learning design begins before facilitation. It starts with understanding who the learners are, what they already know, where the gaps are, and what outcomes matter most. In my roles, I assess learner needs at both the individual and group level, identifying gaps in knowledge, skill, and confidence, and designing targeted learning solutions to close them. Whether working one-on-one with a client navigating a career transition or designing a workshop for a group with diverse experience levels, I approach design as an evidence-based problem-solving process tailored to the learner population.</p>
+      <p>My undergraduate degree gave language and structure to what I had long been doing intuitively, and I now draw on frameworks such as backward design, which begins with clearly defined outcomes and works backward to identify the learning experiences and assessments needed to get there. This approach ensures that every design decision is purposeful and that learning solutions connect directly to the performance outcomes they are intended to support.</p>
 
-      <div class="section-standard">
-        <h2>Equity, Inclusion, and Universal Design for Learning</h2>
-        <p>Equity is foundational to my learning philosophy. I facilitate learning across diverse groups, including internationally trained professionals, individuals with varying literacy levels, people managing significant personal challenges, and learners at every stage of their careers. Designing for this range of experience and need has taught me that inclusion must be woven into the structure of a learning experience from the very beginning.</p>
-        <p>Universal Design for Learning has been one of the most significant areas of growth in my practice. I now design with multiple means of representation, multiple pathways to engagement, and multiple options for demonstrating learning from the outset, because flexibility is a feature of good design. I have come to understand that accessibility encompasses language, cognitive load, prior experience, and the psychological safety required to take risks, ask questions, and engage honestly with challenging material.</p>
-      </div>
+      <h2>Program Evaluation and Continuous Improvement</h2>
+      <p>Design does not end at delivery; facilitators and designers have a responsibility to evaluate whether learning is actually working, and to use that information to improve. In my practice, this looks like structured reflection activities that surface what participants are taking away, feedback loops that inform future iterations of a program, and ongoing attention to whether the conditions for learning are being met.</p>
+      <p>My commitment to evaluation is anchored in the same constructivist principles that guide my facilitation. Since learning is a process of knowledge construction, assessment and evaluation must make that process visible. I look for evidence beyond content retention, such as changed thinking, increased confidence, and the capacity to apply new skills in real contexts. These are the outcomes that matter most, and they require ongoing attention beyond the final session.</p>
 
-      <!-- Assessment — fern 3: slightly different scale -->
-      <div class="section-with-aside">
-        <div>
-          <h2>Assessment as a Learning Tool</h2>
-          <p>My approach to assessment is rooted in the belief that learning is a process, not a product. I prioritize a feedback-first model that emphasizes collaborative evaluation, metacognition, and growth over time. In practice, this means providing clear, specific, and strengths-based feedback that gives learners a concrete understanding of where they stand and what comes next.</p>
-          <p>I am known among my students and clients for the care and detail I bring to feedback, which comes from a commitment to ensuring every learner knows what they are doing well and where they can grow. This approach builds the kind of intrinsic motivation and self-awareness that supports long-term development, which is ultimately the goal of any meaningful learning experience.</p>
-          <p>My philosophy is grounded in the conviction that adult learning must be transformative, equitable, and designed around the full humanity of the learner. Whether I am facilitating a workshop, designing a program, or supporting an individual through a significant transition, that principle guides every decision I make.</p>
-        </div>
-        <div class="section-aside" aria-hidden="true">
-          <svg width="90" height="175" viewBox="0 0 90 175" fill="none" style="opacity:0.24;">
-            <path d="M45 170 Q43 148 40 124 Q34 96 26 70 Q18 46 12 22 Q10 12 12 5" stroke="#3d6b3d" stroke-width="1.9" stroke-linecap="round"/>
-            <path d="M40 124 Q24 115 16 121 Q8 129 14 137 Q24 142 40 133" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.8"/>
-            <path d="M40 124 Q54 115 62 121 Q70 129 62 137 Q52 141 40 133" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.8"/>
-            <path d="M36 106 Q20 97 13 103 Q6 111 12 119 Q22 123 36 114" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.75"/>
-            <path d="M36 106 Q50 97 57 103 Q64 111 56 119 Q47 122 36 114" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.75"/>
-            <path d="M32 89 Q17 80 11 86 Q5 94 11 101 Q20 105 32 96" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.7"/>
-            <path d="M32 89 Q46 80 52 86 Q58 94 50 101 Q42 104 32 96" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.7"/>
-            <path d="M27 73 Q14 64 9 70 Q4 78 10 84 Q18 87 27 79" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.65"/>
-            <path d="M27 73 Q40 64 45 70 Q50 78 43 84 Q36 87 27 79" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.65"/>
-            <path d="M22 57 Q11 49 7 55 Q3 63 8 68 Q15 71 22 64" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.6"/>
-            <path d="M22 57 Q33 49 37 55 Q41 63 35 68 Q28 71 22 64" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.6"/>
-            <path d="M18 43 Q9 36 6 42 Q3 49 8 53 Q14 56 18 50" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.55"/>
-            <path d="M18 43 Q27 36 30 42 Q33 49 28 53 Q22 56 18 50" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.55"/>
-            <path d="M14 30 Q7 24 5 29 Q3 35 7 39 Q12 41 14 36" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.5"/>
-            <path d="M14 30 Q21 24 24 29 Q26 35 22 39 Q17 41 14 36" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.5"/>
-            <path d="M12 18 Q6 13 5 18 Q4 23 8 27 Q12 28 12 23" fill="#4a7a4a" stroke="#3d6b3d" stroke-width="0.45"/>
-            <path d="M12 18 Q18 13 20 18 Q21 23 18 27 Q13 28 12 23" fill="#5a8a5a" stroke="#3d6b3d" stroke-width="0.45"/>
-          </svg>
-        </div>
-      </div>
+      <h2>Equity, Inclusion, and Universal Design for Learning</h2>
+      <p>Equity is foundational to my learning philosophy. I facilitate learning across diverse groups, including internationally trained professionals, individuals with varying literacy levels, people managing significant personal challenges, and learners at every stage of their careers. Designing for this range of experience and need has taught me that inclusion must be woven into the structure of a learning experience from the very beginning.</p>
+      <p>Universal Design for Learning has been one of the most significant areas of growth in my practice. I now design with multiple means of representation, multiple pathways to engagement, and multiple options for demonstrating learning from the outset, because flexibility is a feature of good design. I have come to understand that accessibility encompasses language, cognitive load, prior experience, and the psychological safety required to take risks, ask questions, and engage honestly with challenging material.</p>
+
+      <h2>Assessment as a Learning Tool</h2>
+      <p>My approach to assessment is rooted in the belief that learning is a process, not a product. I prioritize a feedback-first model that emphasizes collaborative evaluation, metacognition, and growth over time. In practice, this means providing clear, specific, and strengths-based feedback that gives learners a concrete understanding of where they stand and what comes next.</p>
+      <p>I am known among my students and clients for the care and detail I bring to feedback, which comes from a commitment to ensuring every learner knows what they are doing well and where they can grow. This approach builds the kind of intrinsic motivation and self-awareness that supports long-term development, which is ultimately the goal of any meaningful learning experience.</p>
+      <p>My philosophy is grounded in the conviction that adult learning must be transformative, equitable, and designed around the full humanity of the learner. Whether I am facilitating a workshop, designing a program, or supporting an individual through a significant transition, that principle guides every decision I make.</p>
 
     </div>
   </section>
 
   <footer>
-    <p style="font-size: 14px; color: var(--ink-muted);">&copy; 2026 Meghan Gilligan</p>
+    <p style="font-size: 12px; color: var(--ink-muted);">&copy; 2026 Meghan Gilligan | Educational Studies Portfolio</p>
+    <div style="margin-top: 1rem;">
+      <a href="mailto:meghan.gilligan@ontariotechu.net" style="text-decoration: none; color: var(--ink); font-size: 11px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">Contact</a>
+    </div>
   </footer>
 
   <script>
-    const menuToggle = document.getElementById("mobile-menu");
-    const navLinks = document.querySelector(".nav-links");
-    menuToggle.addEventListener("click", () => {
-      menuToggle.classList.toggle("active");
-      navLinks.classList.toggle("active");
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
     });
-    document.querySelectorAll(".nav-links a").forEach(link => {
-      link.addEventListener("click", () => {
-        menuToggle.classList.remove("active");
-        navLinks.classList.remove("active");
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
       });
     });
   </script>
+
 </body>
 </html>
