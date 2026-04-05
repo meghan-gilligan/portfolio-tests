@@ -8,92 +8,323 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --cream: #F7F4EF; --warm-white: #FDFCFA; --ink: #1C1A17; --ink-soft: #4A4640; --ink-muted: #8C887F;
-      --accent: #7B6E5D; --accent-warm: #A08B6E; --rule: #DDD8CF; --nav-height: 72px;
-      --header-font: 'Montserrat', sans-serif; --body-font: 'DM Sans', sans-serif;
+      --cream: #F4F1EB;
+      --warm-white: #EDE9E0;
+      --ink: #1C1A17;
+      --ink-soft: #4A4640;
+      --ink-muted: #8C887F;
+      --accent: #6D8C4A;
+      --accent-light: #8BA86A;
+      --accent-warm: #7A9A4A;
+      --rule: #C5BFB0;
+      --nav-height: 64px;
+      --header-font: 'Montserrat', sans-serif;
+      --body-font: 'DM Sans', sans-serif;
     }
-    body { font-family: var(--body-font); background: var(--cream); color: var(--ink); line-height: 1.7; }
-    nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height); background: rgba(247, 244, 239, 0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; z-index: 100; }
-    .nav-name { font-family: var(--header-font); font-size: 18px; font-weight: 700; color: var(--ink); text-decoration: none; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; transition: color 0.2s ease; }
-    .nav-links a:hover { color: var(--accent); }
 
-    /* ── MOBILE MENU TOGGLE ── */
+    body {
+      font-family: var(--body-font);
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-height);
+      background: rgba(244, 241, 235, 0.93);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      z-index: 100;
+    }
+
+    .nav-name {
+      font-family: var(--header-font);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
     .menu-toggle {
       display: none;
       flex-direction: column;
       justify-content: space-between;
-      width: 24px;
-      height: 18px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      z-index: 101;
+      width: 24px; height: 18px;
+      background: none; border: none;
+      cursor: pointer; padding: 0; z-index: 101;
     }
 
     .menu-toggle span {
-      width: 100%;
-      height: 2px;
+      width: 100%; height: 2px;
       background-color: var(--ink);
       transition: all 0.3s ease;
     }
 
-    section { padding: 8rem 3rem 5rem; max-width: 1100px; margin: 0 auto; }
-    
-    .project-grid { 
-      display: grid; 
-      grid-template-columns: repeat(2, 1fr); 
-      gap: 1.5px; 
-      background: var(--rule); 
-      border: 1px solid var(--rule); 
-      margin-top: 3rem; 
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      height: 260px;
+      display: flex;
+      align-items: flex-end;
+      margin-top: var(--nav-height);
     }
-    
-    .project-card { background: var(--warm-white); padding: 2.5rem; text-decoration: none; display: flex; flex-direction: column; height: 100%; }
 
-    /* ── PROJECT IMAGE ── */
-    .project-image {
+    .hero-img-fallback {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #3A4E28 0%, #5A7A3A 40%, #8BA86A 70%, #C5D8A0 100%);
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 50%;
+      filter: brightness(0.85) saturate(0.88);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(50,65,35,0.10) 0%, rgba(30,40,20,0.55) 100%);
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 2;
+      padding: 0 2.5rem 2rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #C8D9A8;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
       display: block;
-      margin: 1.25rem 0;
+    }
+
+    .hero-title {
+      font-family: var(--header-font);
+      font-size: 26px;
+      font-weight: 700;
+      color: #F0EDE6;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    /* ── SECTION ── */
+    section {
+      padding: 2.5rem 2.5rem 5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-eyebrow {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--ink-muted);
+      font-weight: 500;
+    }
+
+    .section-title {
+      font-family: var(--header-font);
+      font-size: 28px;
+      margin-top: 0.5rem;
+      color: var(--ink);
+    }
+
+    /* ── PROJECT GRID ── */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5px;
+      background: var(--rule);
       border: 1px solid var(--rule);
     }
-    
-    .annotation-box { 
-      margin: 1.5rem 0; 
-      padding: 1.5rem; 
-      background: rgba(123, 110, 93, 0.04); 
-      border-left: 2px solid var(--accent-warm); 
+
+    .project-card {
+      background: var(--warm-white);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
     }
-    
-    .annotation-text {
-      font-size: 13px; 
-      line-height: 1.6; 
+
+    .project-tag {
+      font-size: 10px;
+      color: var(--accent-warm);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-card h3 {
+      font-family: var(--header-font);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      font-size: 13px;
       color: var(--ink-soft);
+      margin-bottom: 0;
+    }
+
+    /* ── IMAGE ALIGNMENT ── */
+    /* 
+      Fixed-height image container ensures all project images 
+      sit at the same vertical position across both columns.
+    */
+    .project-image-wrap {
+      width: 100%;
+      height: 200px;
+      margin: 1.25rem 0;
+      overflow: hidden;
+      border: 1px solid var(--rule);
+      background: #E8EDDF;
+    }
+
+    .project-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+
+    /* Placeholder for cards without an image yet */
+    .project-image-placeholder {
+      width: 100%;
+      height: 200px;
+      margin: 1.25rem 0;
+      border: 1px solid var(--rule);
+      background: #E8EDDF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .project-image-placeholder span {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+    }
+
+    /* ── ANNOTATION BOX ── */
+    .annotation-box {
+      margin: 1.25rem 0 0;
+      padding: 1.25rem 1.25rem 0;
+      background: rgba(109, 140, 74, 0.04);
+      border-left: 2px solid var(--accent-light);
+    }
+
+    /* Summary toggle */
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--accent-warm);
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      list-style: none;
+      outline: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    /* Tighter gap between summary and first heading */
+    details[open] summary {
+      margin-bottom: 1rem;
+    }
+
+    .annotation-text {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      padding-bottom: 1.25rem; /* controlled bottom space */
     }
 
     .annotation-text p {
-      margin-bottom: 1rem;
+      margin-bottom: 0.85rem; /* tighter between paragraphs */
+    }
+
+    .annotation-text p:last-child {
+      margin-bottom: 0; /* no trailing space after last paragraph */
     }
 
     .annotation-text strong {
       color: var(--ink);
       text-transform: uppercase;
-      font-size: 12px;
-      letter-spacing: 0.05em;
+      font-size: 11px;
+      letter-spacing: 0.06em;
       display: block;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.2rem;
+      margin-top: 0; /* no extra top gap — summary->first strong gap handled above */
     }
 
-    summary { cursor: pointer; font-weight: 700; color: var(--accent-warm); text-transform: uppercase; font-size: 12px; list-style: none; outline: none; }
-    footer { padding: 4rem 3rem; background: var(--warm-white); text-align: center; border-top: 1px solid var(--rule); }
+    /* ── VIEW LINK ── */
+    .view-link {
+      margin-top: 1.25rem;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: inline-block;
+    }
 
+    .view-link:hover { color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 3rem;
+      background: var(--warm-white);
+      text-align: center;
+      border-top: 1px solid var(--rule);
+    }
+
+    /* ── MOBILE ── */
     @media (max-width: 768px) {
       nav { padding: 0 1.5rem; }
-      
+
       .menu-toggle { display: flex; }
 
       .nav-links {
@@ -101,8 +332,7 @@
         flex-direction: column;
         position: absolute;
         top: var(--nav-height);
-        left: 0;
-        right: 0;
+        left: 0; right: 0;
         background: var(--cream);
         padding: 3rem 1.5rem;
         border-bottom: 1px solid var(--rule);
@@ -117,19 +347,23 @@
       .menu-toggle.active span:nth-child(2) { opacity: 0; }
       .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-      section { padding: 6rem 1.5rem 4rem; }
-      .project-grid { grid-template-columns: 1fr !important; }
+      section { padding: 2rem 1.5rem 3rem; }
+      .project-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 20px; }
+      .hero-text { padding: 0 1.5rem 1.5rem; }
     }
+
+    .fade-in { opacity: 0; transform: translateY(18px); transition: 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
+
   <nav>
     <a class="nav-name" href="index.html">Meghan Gilligan</a>
 
     <button class="menu-toggle" id="mobile-menu" aria-label="Open Menu">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
 
     <ul class="nav-links">
@@ -141,142 +375,163 @@
     </ul>
   </nav>
 
-  <section id="projects">
-    <div class="section-header fade-in">
-      <p style="font-size: 14px; text-transform: uppercase; color: var(--ink-muted);">Curated Artifacts</p>
-      <h2 style="font-family: var(--header-font); font-size: 32px; margin-top: 0.5rem;">Work samples & design projects</h2>
+  <!-- HERO — uses leaf2.jpg from root folder -->
+  <div class="hero">
+    <div class="hero-img-fallback"></div>
+    <img class="hero-img" src="leaf2.jpg" alt="Close-up macro photograph of a tropical leaf" />
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <span class="hero-eyebrow">Curated Artifacts</span>
+      <h2 class="hero-title">Work samples &amp; design projects</h2>
     </div>
-    
+  </div>
+
+  <section id="projects">
+
     <div class="project-grid fade-in">
-      
+
+      <!-- CARD 1 -->
       <div class="project-card">
-        <p style="font-size: 14px; color: var(--accent-warm); text-transform: uppercase;">eLearning</p>
+        <p class="project-tag">eLearning</p>
         <h3>Inclusive eLearning Practices</h3>
-        <p style="font-size: 13px; color: var(--ink-soft);">Collaborated on an eLearning project focused on equipping educators to apply UDL principles to support neurodiverse adult learners.</p>
-        <img class="project-image" src="inclusive.jpg" alt="Inclusive eLearning Practices Canvas eLearning module preview" />
+        <p class="project-desc">Collaborated on an eLearning project focused on equipping educators to apply UDL principles to support neurodiverse adult learners.</p>
+        <div class="project-image-wrap">
+          <img src="inclusive.jpg" alt="Inclusive eLearning Practices Canvas eLearning module preview" />
+        </div>
         <div class="annotation-box">
           <details>
             <summary>Reflective Annotation</summary>
             <div class="annotation-text">
-              <p><strong>Context & Audience:</strong> This artifact represents a scaffolded, multi-phase project completed for Managing & Developing eLearning Projects, designed to take students through the full lifecycle of an eLearning development project from problem identification to professional delivery. The first phase required our group to identify an issue in higher education and develop an eLearning solution to address it. We identified platform fragmentation, the practice of educators using multiple disconnected tools within a single course,  as a significant and under-addressed barrier, particularly for neurodivergent students who experience disproportionate cognitive load navigating these fractured environments. Our solution was a five-module Canvas course designed as asynchronous professional development for higher education educators, faculty, and instructional designers, with neurodivergent students as the ultimate beneficiaries. The final phase of the course then tasked us with producing a full professional proposal, simulating a real-world Request for Proposal response to Ontario Tech University, which allowed us to practice the complete scope of managing an eLearning project from inception through delivery, evaluation, and budget planning.</p>
-              <p><strong>Design Decisions:</strong> Every design decision in this project was made with intention, rooted in both research and lived experience; the majority of our team are neurodivergent learners, allowing us to approach the design from the inside out. The most foundational decision was platform consolidation: housing all course content, assessments, activities, and communication within a single Canvas environment, so that educators experiencing the course would benefit from the principles being taught. This approach was central to the design's integrity. The course was structured using the full UDL framework, with content delivered through short videos, text summaries, visual infographics, and case studies to address Multiple Means of Representation. Interactive H5P elements, reflective journals, and Padlet activities addressed Multiple Means of Engagement, while a flexible final assessment, offering a choice between a multiple-choice quiz or a practical UDL-aligned syllabus redesign,  addressed Multiple Means of Action and Expression. Typography, colour contrast, and content chunking were tested against WCAG 2.1 AA and AODA standards, and the platform was independently verified to achieve 95%+ accessibility compliance. The final proposal extended these design principles into a professional deliverable, articulating a phased, agile implementation strategy complete with an analytics framework, assessment toolkit, and benchmarking rubric for measuring long-term impact.</p>
-              <p><strong>Inclusion & Accessibility:</strong> Inclusion was the project; the course was built specifically to address how fragmented eLearning environments disproportionately harm neurodivergent learners by increasing cognitive load and undermining executive function, rather than providing a coherent learning experience. Every structural and aesthetic choice, from the strictly linear navigation to the minimalist visual design, to the sans-serif typface, and a high-contrast colour palette, was made to reduce extraneous cognitive demand and support sustained engagement. Closed captions and full transcripts were included for all video content, all images included alt text, and interactive elements were keyboard-navigable. Beyond technical compliance, the course also addressed the social and psychological dimensions of inclusion, incorporating anonymous participation tools like Padlet to reduce social pressure and support authentic engagement for learners who find direct interaction overwhelming. Crucially, the design was informed by our team's neurodivergent identities, ensuring the course reflected both academic theory and an authentic, lived understanding of the barriers being addressed.</p>
+              <p><strong>Context &amp; Audience:</strong> This artifact represents a scaffolded, multi-phase project completed for Managing &amp; Developing eLearning Projects, designed to take students through the full lifecycle of an eLearning development project from problem identification to professional delivery. The first phase required our group to identify an issue in higher education and develop an eLearning solution to address it. We identified platform fragmentation, the practice of educators using multiple disconnected tools within a single course, as a significant and under-addressed barrier, particularly for neurodivergent students who experience disproportionate cognitive load navigating these fractured environments. Our solution was a five-module Canvas course designed as asynchronous professional development for higher education educators, faculty, and instructional designers, with neurodivergent students as the ultimate beneficiaries. The final phase of the course then tasked us with producing a full professional proposal, simulating a real-world Request for Proposal response to Ontario Tech University, which allowed us to practice the complete scope of managing an eLearning project from inception through delivery, evaluation, and budget planning.</p>
+              <p><strong>Design Decisions:</strong> Every design decision in this project was made with intention, rooted in both research and lived experience; the majority of our team are neurodivergent learners, allowing us to approach the design from the inside out. The most foundational decision was platform consolidation: housing all course content, assessments, activities, and communication within a single Canvas environment, so that educators experiencing the course would benefit from the principles being taught. This approach was central to the design's integrity. The course was structured using the full UDL framework, with content delivered through short videos, text summaries, visual infographics, and case studies to address Multiple Means of Representation. Interactive H5P elements, reflective journals, and Padlet activities addressed Multiple Means of Engagement, while a flexible final assessment, offering a choice between a multiple-choice quiz or a practical UDL-aligned syllabus redesign, addressed Multiple Means of Action and Expression. Typography, colour contrast, and content chunking were tested against WCAG 2.1 AA and AODA standards, and the platform was independently verified to achieve 95%+ accessibility compliance. The final proposal extended these design principles into a professional deliverable, articulating a phased, agile implementation strategy complete with an analytics framework, assessment toolkit, and benchmarking rubric for measuring long-term impact.</p>
+              <p><strong>Inclusion &amp; Accessibility:</strong> Inclusion was the project; the course was built specifically to address how fragmented eLearning environments disproportionately harm neurodivergent learners by increasing cognitive load and undermining executive function. Every structural and aesthetic choice, from the strictly linear navigation to the minimalist visual design, to the sans-serif typeface, and a high-contrast colour palette, was made to reduce extraneous cognitive demand and support sustained engagement. Closed captions and full transcripts were included for all video content, all images included alt text, and interactive elements were keyboard-navigable. Beyond technical compliance, the course also addressed the social and psychological dimensions of inclusion, incorporating anonymous participation tools like Padlet to reduce social pressure and support authentic engagement for learners who find direct interaction overwhelming. Crucially, the design was informed by our team's neurodivergent identities, ensuring the course reflected both academic theory and an authentic, lived understanding of the barriers being addressed.</p>
               <p><strong>Development:</strong> This project is one I am particularly proud of, as it represents a complete demonstration of the design thinking process. The scaffolded structure of the course, moving from problem identification to solution development to professional proposal, mirrored the real workflow of an instructional design project, and experiencing that full arc in a single course was extremely valuable. Working collaboratively as a team of predominantly neurodivergent learners, we also faced and navigated real challenges: task initiation, perfectionism, time management, and technology hurdles. Developing creative, empathetic strategies to move through those obstacles together was itself a practical lesson in adaptive leadership and inclusive collaboration. This artifact captures where my skills, values, and identity as an educator converge: in the belief that well-designed learning environments have the power to remove barriers, restore dignity, and change outcomes for learners who need it most.</p>
             </div>
           </details>
         </div>
-        <a href="https://lor.instructure.com/resources/994b35127e4e4ce99bafc31ddee122d7?shared" target="_blank" style="margin-top: auto; font-size: 14px; font-weight: 700; color: var(--ink); text-decoration: none; text-transform: uppercase;">View project →</a>
+        <a class="view-link" href="https://lor.instructure.com/resources/994b35127e4e4ce99bafc31ddee122d7?shared" target="_blank">View project →</a>
       </div>
 
-       <div class="project-card">
-        <p style="font-size: 14px; color: var(--accent-warm); text-transform: uppercase;">Assessment & Evaluation</p>
+      <!-- CARD 2 -->
+      <div class="project-card">
+        <p class="project-tag">Assessment &amp; Evaluation</p>
         <h3>Self-Assessment Skills in Higher Education</h3>
-        <p style="font-size: 13px; color: var(--ink-soft);">Leveraged UDL principles to design and deploy a Canvas LMS module focused on self-assessment and metacognitive growth.</p>
-        <img class="project-image" src="self-assessment.jpg" alt="Self-Assessment Skills in Higher Education Canvas page preview" />
+        <p class="project-desc">Leveraged UDL principles to design and deploy a Canvas LMS module focused on self-assessment and metacognitive growth.</p>
+        <div class="project-image-wrap">
+          <img src="self-assessment.jpg" alt="Self-Assessment Skills in Higher Education Canvas page preview" />
+        </div>
         <div class="annotation-box">
           <details>
             <summary>Reflective Annotation</summary>
             <div class="annotation-text">
-              <p><strong>Context & Audience:</strong> This artifact is a Canvas LMS module created for an Assessment & Evaluation course, designed to address a well-documented challenge in higher education: students' tendency to inaccurately evaluate their own performance due to cognitive biases and limited metacognitive awareness. The module was developed as a collaborative project with a partner, which I took the lead on. It draws on evidence-based frameworks from educational psychology to scaffold self-assessment as a teachable, developable skill. The intended audience is higher education learners, particularly those navigating independent and online learning environments where self-regulation is essential to academic success. The module's reach, however, extended beyond the course: our course instructor selected it as an in-class example and has requested to continue using it as an exemplar in both Assessment & Evaluation and Creating Digital Tools courses.
-</p>
+              <p><strong>Context &amp; Audience:</strong> This artifact is a Canvas LMS module created for an Assessment &amp; Evaluation course, designed to address a well-documented challenge in higher education: students' tendency to inaccurately evaluate their own performance due to cognitive biases and limited metacognitive awareness. The module was developed as a collaborative project with a partner, which I took the lead on. It draws on evidence-based frameworks from educational psychology to scaffold self-assessment as a teachable, developable skill. The intended audience is higher education learners, particularly those navigating independent and online learning environments where self-regulation is essential to academic success. The module's reach, however, extended beyond the course: our course instructor selected it as an in-class example and has requested to continue using it as an exemplar in both Assessment &amp; Evaluation and Creating Digital Tools courses.</p>
               <p><strong>Design Decisions:</strong> The module was structured using the ADDIE model, with particular attention given to the Evaluation phase, a process that directly mirrored the metacognitive skills being taught. Content was organized into a clear learning roadmap with three defined outcomes: analyzing the relationship between metacognition and self-regulated learning, identifying cognitive biases that impair self-assessment, and applying structured frameworks to evaluate one's own work. To support varied learning preferences, the module employed dual coding and content chunking, pairing written explanations with interactive flip cards, an embedded video, a case study contrast, and a self-assessment quiz. A deliberate design choice was to use HTML to elevate the page's visual and functional quality, moving beyond standard Canvas formatting to create a more polished, professional, and engaging learner experience.</p>
-              <p><strong>Inclusion & Accessibility:</strong> Inclusion was embedded in the design through an explicit alignment with Universal Design for Learning (UDL), specifically Guidelines 9.2: Develop awareness of self and others, and 9.3: Promote individual and collective reflection. The module scaffolds the kind of reflective, goal-directed thinking that UDL identifies as characteristic of expert learners, making these skills explicit and accessible. Representation strategies such as content chunking and dual coding ensure that metacognitive frameworks are perceivable and approachable for learners across different learning profiles. The case study contrasting two student approaches, one relying on gut feeling, one using structured self-regulatory strategies,  was designed to make abstract concepts concrete and relatable, lowering barriers to engagement for learners who may not have prior experience with metacognitive frameworks.</p>
+              <p><strong>Inclusion &amp; Accessibility:</strong> Inclusion was embedded in the design through an explicit alignment with Universal Design for Learning (UDL), specifically Guidelines 9.2: Develop awareness of self and others, and 9.3: Promote individual and collective reflection. The module scaffolds the kind of reflective, goal-directed thinking that UDL identifies as characteristic of expert learners, making these skills explicit and accessible. Representation strategies such as content chunking and dual coding ensure that metacognitive frameworks are perceivable and approachable for learners across different learning profiles. The case study contrasting two student approaches was designed to make abstract concepts concrete and relatable, lowering barriers to engagement for learners who may not have prior experience with metacognitive frameworks.</p>
               <p><strong>Development:</strong> This artifact represents one of the clearest examples of growth in my portfolio. Created shortly after completing my Inclusive eLearning Practices course, it reflects how rapidly my design capabilities developed within that period, both technically and pedagogically. My expanded knowledge of HTML enabled me to build a page that exceeded standard course tool expectations, and my deeper engagement with UDL principles ensured accessibility and inclusion were built into the design from the start. The fact that this module was selected by my instructor as a classroom exemplar and requested for continued use in future courses affirmed that I had moved from learning design principles to applying them at a high level. This project marked a meaningful shift in how I see myself: as a student of instructional design, and someone capable of producing work that contributes meaningfully to others' learning.</p>
             </div>
           </details>
         </div>
-        <a href="https://meghan-gilligan.github.io/Self-Assessment-Skills-in-Higher-Education/" target="_blank" style="margin-top: auto; font-size: 14px; font-weight: 700; color: var(--ink); text-decoration: none; text-transform: uppercase;">View project →</a>
+        <a class="view-link" href="https://meghan-gilligan.github.io/Self-Assessment-Skills-in-Higher-Education/" target="_blank">View project →</a>
       </div>
 
+      <!-- CARD 3 -->
       <div class="project-card">
-        <p style="font-size: 14px; color: var(--accent-warm); text-transform: uppercase;">Research & Application</p>
+        <p class="project-tag">Research &amp; Application</p>
         <h3>AI Tools in Career Planning</h3>
-        <p style="font-size: 13px; color: var(--ink-soft);">
-          Authored a research paper and digital resource guide for AI-driven career planning, and showcased it at the 
-          <a href="https://education.ontariotechu.ca/cdie/events/cdie-conf-2025.php#tab2-4" target="_blank" style="color: var(--accent-warm); text-decoration: underline; font-weight: 500;">2025 Digital Innovation in Education Conference</a> at Ontario Tech University.
-        </p>
-      <a href="https://canva.link/97lkhx6jy4r8yh1" target="_blank" rel="noopener noreferrer">
-      <img class="project-image" src="poster.png" alt="AI Tools in Career Planning conference poster" />
-      </a>
+        <p class="project-desc">Authored a research paper and digital resource guide for AI-driven career planning, and showcased it at the <a href="https://education.ontariotechu.ca/cdie/events/cdie-conf-2025.php#tab2-4" target="_blank" style="color: var(--accent-warm); text-decoration: underline; font-weight: 500;">2025 Digital Innovation in Education Conference</a> at Ontario Tech University.</p>
+        <div class="project-image-wrap">
+          <a href="https://canva.link/97lkhx6jy4r8yh1" target="_blank" rel="noopener noreferrer" style="display:block; height:100%;">
+            <img src="poster.png" alt="AI Tools in Career Planning conference poster" style="width:100%; height:100%; object-fit:cover; object-position:top;" />
+          </a>
+        </div>
         <div class="annotation-box">
           <details>
             <summary>Reflective Annotation</summary>
             <div class="annotation-text">
-              <p><strong>Context & Audience:</strong> This artifact was created as a research paper and digital resource guide for an AI in Education course, exploring how artificial intelligence can transform career advising and workforce readiness. The project was selected as one of four from a cohort of 60+ students to be presented as a poster at the 2025 Digital Innovation in Education Conference at Ontario Tech University. The intended audience is broad and intentionally inclusive: aspiring educators, student development and career advising professionals, job seekers navigating career transitions, and anyone curious about the expanding role of AI in education and workforce development.</p>
+              <p><strong>Context &amp; Audience:</strong> This artifact was created as a research paper and digital resource guide for an AI in Education course, exploring how artificial intelligence can transform career advising and workforce readiness. The project was selected as one of four from a cohort of 60+ students to be presented as a poster at the 2025 Digital Innovation in Education Conference at Ontario Tech University. The intended audience is broad and intentionally inclusive: aspiring educators, student development and career advising professionals, job seekers navigating career transitions, and anyone curious about the expanding role of AI in education and workforce development.</p>
               <p><strong>Design Decisions:</strong> The poster was designed to be both research-grounded and practically accessible, bridging academic inquiry with real-world application. A central design decision was to structure the content around a step-by-step, AI-supported but human-centred framework, ensuring that technology was positioned as a tool to enhance, not replace, the human relationships at the core of career advising. The resource guide format was chosen deliberately to give audiences something actionable to take away, covering personalized career guidance, job search assistance, and self-marketing strategies. Ethical considerations and equitable AI integration were woven throughout, reflecting a commitment to responsible innovation.</p>
-              <p><strong>Inclusion & Accessibility:</strong> Inclusion was a foundational principle of this work. The research highlights how AI career planning tools can reduce systemic barriers for job seekers, improve job matching, support skill development, and increase accessibility for individuals who may not have access to dedicated career advising services. Equally, the project acknowledges the human side of the equation: reducing burnout among career advisors and easing distress for job seekers by streamlining time-intensive processes. By centering ethical and equitable AI integration, the poster advocates for technology that serves diverse populations fairly, including those from underrepresented or under-resourced communities entering the workforce or transitioning roles. </p>
+              <p><strong>Inclusion &amp; Accessibility:</strong> Inclusion was a foundational principle of this work. The research highlights how AI career planning tools can reduce systemic barriers for job seekers, improve job matching, support skill development, and increase accessibility for individuals who may not have access to dedicated career advising services. Equally, the project acknowledges the human side of the equation: reducing burnout among career advisors and easing distress for job seekers by streamlining time-intensive processes. By centering ethical and equitable AI integration, the poster advocates for technology that serves diverse populations fairly, including those from underrepresented or under-resourced communities.</p>
               <p><strong>Development:</strong> This artifact reflects significant growth in my ability to engage critically with emerging educational technologies and communicate complex ideas to a diverse professional audience. Producing a research paper that was recognized at a university-level conference demonstrated my capacity for independent inquiry, synthesis of current literature, and creative presentation of ideas. More broadly, this project pushed me to think beyond the classroom, to consider how the tools and frameworks I study can have a tangible impact on real people navigating real challenges. It marks a shift in my development from consuming knowledge about ed tech to actively contributing to the conversation around its ethical and effective application.</p>
             </div>
           </details>
         </div>
-        <a href="https://drive.google.com/file/d/1UVpdDqrd9GyubwlaKwMzRB5Vm3EXJOEA/view?usp=drive_link" target="_blank" style="margin-top: auto; font-size: 14px; font-weight: 700; color: var(--ink); text-decoration: none; text-transform: uppercase;">View project →</a>
+        <a class="view-link" href="https://drive.google.com/file/d/1UVpdDqrd9GyubwlaKwMzRB5Vm3EXJOEA/view?usp=drive_link" target="_blank">View project →</a>
       </div>
 
-            <div class="project-card">
-        <p style="font-size: 14px; color: var(--accent-warm); text-transform: uppercase;">Educational Technology</p>
+      <!-- CARD 4 -->
+      <div class="project-card">
+        <p class="project-tag">Educational Technology</p>
         <h3>Thriving as an Adult Learner</h3>
-        <p style="font-size: 13px; color: var(--ink-soft);">Created with Articulate 360 to help mature students manage competing demands of post-secondary life.</p>
-        <img class="project-image" src="thriving.jpg" alt="Thriving as an Adult Learner Articulate 360 eLearning module preview" />
+        <p class="project-desc">Created with Articulate 360 to help mature students manage competing demands of post-secondary life.</p>
+        <div class="project-image-wrap">
+          <img src="thriving.jpg" alt="Thriving as an Adult Learner Articulate 360 eLearning module preview" />
+        </div>
         <div class="annotation-box">
           <details>
             <summary>Reflective Annotation</summary>
             <div class="annotation-text">
-              <p><strong>Context & Audience:</strong> This artifact is Module 6 of a six-module digital orientation course developed collaboratively for a Developing Your Educational Technology Portfolio course. It is designed specifically for adult learners returning to Ontario Tech University after ten or more years away from formal education. This course is rooted in authenticity, as we are a team of adult learners who have gone back to school after 10+ years. The course as a whole was built to bridge the gap between returning students' previous academic experiences and the modern, technology-integrated campus environment they are entering, addressing digital fluency, academic expectations, LMS navigation, and institutional support. My module, Thriving as an Adult Learner, serves as the course's culminating experience, focusing on the practical and emotional challenges unique to this population: managing time, balancing competing personal and professional demands, navigating perfectionism, and rebuilding confidence as a learner. The intended audience is adult students who bring rich life experience alongside real anxiety about returning to school, and who require skills instruction and affirmation that they belong in the academic environment they are re-entering.</p>
-              <p><strong>Design Decisions:</strong> The course was developed in Articulate 360 and hosted within Canvas LMS. This deliberate choice reduced platform fragmentation and created a consistent, predictable learning environment for a population already managing significant cognitive load outside the classroom. Articulate 360 was selected for its accessibility features and the professional development opportunity it offered, as it is widely used in corporate training and post-secondary instructional design contexts. Within my module, content was structured to honour the finite time and energy of adult learners: lessons are concise, purposefully sequenced, and free of unnecessary complexity. Reflective prompts invite learners to connect course concepts directly to their own lives and goals, grounding abstract strategies in lived experience. Low-stakes formative assessments at the close of each lesson, varied in format across the course to include multiple choice, matching, fill-in-the-blank, and scenario-based activities, allow learners to demonstrate understanding without the pressure of high-stakes evaluation. The module's tone is warm and encouraging, recognizing that for many returning students, rebuilding their identity as a learner is as important as acquiring practical skills.</p>
-              <p><strong>Inclusion & Accessibility:</strong> Inclusion was embedded in this project at every level of the design. All modules in the course use a sans-serif typeface for digital readability, standardized heading and body font sizes for clear visual hierarchy, and high-contrast colour combinations tested against Adobe's colour contrast analyzer. All video content includes closed captions and transcripts, supporting learners with attention, sensory, or cognitive differences. The course was also designed to comply with AODA requirements, reflecting Ontario Tech's commitments under provincial accessibility legislation. More broadly, the UDL framework shaped every aspect of the module: Multiple Means of Representation through varied content formats, Multiple Means of Engagement through reflective activities that connect learning to personal goals, and Multiple Means of Action and Expression through low-stakes, varied assessment types. Notably, the module's focus on mindset, perfectionism, and confidence directly addresses the social-emotional dimensions of inclusion, acknowledging that returning to school after a decade away is courageous. We designed the content to meet learners with that understanding.</p>
-              <p><strong>Development:</strong> This module represents a convergence of my technical skills and my values as an educator. Gaining hands-on experience with Articulate 360 was a professional development goal, and building a complete, polished module in a tool used widely in the field gave me practical competency I can bring directly into my career. More personally, this project deepened my understanding of adult learners and their unique needs as people who have lived fully and are choosing to invest in themselves. Designing for that population required empathy as much as technique, and it reinforced my belief that the most effective instructional design begins with understanding who you are designing for. The collaborative nature of the project, six team members each leading a module, then engaging in weekly peer feedback to ensure cohesion across the whole, also strengthened my ability to contribute to and coordinate within a design team.
-</p>
+              <p><strong>Context &amp; Audience:</strong> This artifact is Module 6 of a six-module digital orientation course developed collaboratively for a Developing Your Educational Technology Portfolio course. It is designed specifically for adult learners returning to Ontario Tech University after ten or more years away from formal education. This course is rooted in authenticity, as we are a team of adult learners who have gone back to school after 10+ years. The course as a whole was built to bridge the gap between returning students' previous academic experiences and the modern, technology-integrated campus environment they are entering. My module, Thriving as an Adult Learner, serves as the course's culminating experience, focusing on the practical and emotional challenges unique to this population: managing time, balancing competing personal and professional demands, navigating perfectionism, and rebuilding confidence as a learner.</p>
+              <p><strong>Design Decisions:</strong> The course was developed in Articulate 360 and hosted within Canvas LMS. This deliberate choice reduced platform fragmentation and created a consistent, predictable learning environment for a population already managing significant cognitive load outside the classroom. Within my module, content was structured to honour the finite time and energy of adult learners: lessons are concise, purposefully sequenced, and free of unnecessary complexity. Reflective prompts invite learners to connect course concepts directly to their own lives and goals, grounding abstract strategies in lived experience. Low-stakes formative assessments at the close of each lesson, varied in format across the course, allow learners to demonstrate understanding without the pressure of high-stakes evaluation.</p>
+              <p><strong>Inclusion &amp; Accessibility:</strong> Inclusion was embedded in this project at every level of the design. All modules use a sans-serif typeface for digital readability, standardized heading and body font sizes for clear visual hierarchy, and high-contrast colour combinations tested against Adobe's colour contrast analyzer. All video content includes closed captions and transcripts, supporting learners with attention, sensory, or cognitive differences. The course was also designed to comply with AODA requirements. The UDL framework shaped every aspect of the module, and notably, the module's focus on mindset, perfectionism, and confidence directly addresses the social-emotional dimensions of inclusion, acknowledging that returning to school after a decade away is courageous.</p>
+              <p><strong>Development:</strong> This module represents a convergence of my technical skills and my values as an educator. Gaining hands-on experience with Articulate 360 was a professional development goal, and building a complete, polished module in a tool used widely in the field gave me practical competency I can bring directly into my career. More personally, this project deepened my understanding of adult learners and their unique needs as people who have lived fully and are choosing to invest in themselves. The collaborative nature of the project, six team members each leading a module then engaging in weekly peer feedback to ensure cohesion across the whole, also strengthened my ability to contribute to and coordinate within a design team.</p>
             </div>
           </details>
         </div>
-        <a href="https://meghan-gilligan.github.io/Thriving-as-an-Adult-Learner/" target="_blank" style="margin-top: auto; font-size: 14px; font-weight: 700; color: var(--ink); text-decoration: none; text-transform: uppercase;">View project →</a>
+        <a class="view-link" href="https://meghan-gilligan.github.io/Thriving-as-an-Adult-Learner/" target="_blank">View project →</a>
       </div>
 
+      <!-- CARD 5 -->
       <div class="project-card">
-        <p style="font-size: 14px; color: var(--accent-warm); text-transform: uppercase;">Instructional Design</p>
+        <p class="project-tag">Instructional Design</p>
         <h3>Workplace Learning Course Redesign</h3>
-        <p style="font-size: 13px; color: var(--ink-soft);">A full course redevelopment using backward design — learning outcomes, unit plans, and summative assessments.</p>
-        <!-- Add image src below when ready, e.g. src="workplace-learning.png" -->
-        <!-- <img class="project-image" src="" alt="Workplace Learning Course Redesign preview" /> -->
+        <p class="project-desc">A full course redevelopment using backward design — learning outcomes, unit plans, and summative assessments.</p>
+        <div class="project-image-placeholder">
+          <span>Image coming soon</span>
+        </div>
         <div class="annotation-box">
           <details>
             <summary>Reflective Annotation</summary>
             <div class="annotation-text">
-              <p><strong>Context & Audience:</strong> [Insert Text]</p>
+              <p><strong>Context &amp; Audience:</strong> [Insert Text]</p>
               <p><strong>Design Decisions:</strong> [Insert Text]</p>
-              <p><strong>Inclusion & Accessibility:</strong> [Insert Text]</p>
+              <p><strong>Inclusion &amp; Accessibility:</strong> [Insert Text]</p>
               <p><strong>Development:</strong> [Insert Text]</p>
             </div>
           </details>
         </div>
-        <a href="#" style="margin-top: auto; font-size: 14px; font-weight: 700; color: var(--ink); text-decoration: none; text-transform: uppercase;">View project →</a>
+        <a class="view-link" href="#">View project →</a>
       </div>
-  
+
+      <!-- CARD 6 -->
       <div class="project-card">
-        <p style="font-size: 14px; color: var(--accent-warm); text-transform: uppercase;">Facilitation</p>
+        <p class="project-tag">Facilitation</p>
         <h3>Job Search Skills Workshop Series</h3>
-        <p style="font-size: 13px; color: var(--ink-soft);">Lesson plans and workshop designs for co-op and community employment programs.</p>
-        <!-- Add image src below when ready, e.g. src="workshop-series.png" -->
-        <!-- <img class="project-image" src="" alt="Job Search Skills Workshop Series preview" /> -->
+        <p class="project-desc">Lesson plans and workshop designs for co-op and community employment programs.</p>
+        <div class="project-image-placeholder">
+          <span>Image coming soon</span>
+        </div>
         <div class="annotation-box">
           <details>
             <summary>Reflective Annotation</summary>
             <div class="annotation-text">
-              <p><strong>Context & Audience:</strong> [Insert Text]</p>
+              <p><strong>Context &amp; Audience:</strong> [Insert Text]</p>
               <p><strong>Design Decisions:</strong> [Insert Text]</p>
-              <p><strong>Inclusion & Accessibility:</strong> [Insert Text]</p>
+              <p><strong>Inclusion &amp; Accessibility:</strong> [Insert Text]</p>
               <p><strong>Development:</strong> [Insert Text]</p>
             </div>
           </details>
         </div>
-        <a href="#" style="margin-top: auto; font-size: 14px; font-weight: 700; color: var(--ink); text-decoration: none; text-transform: uppercase;">View project →</a>
+        <a class="view-link" href="#">View project →</a>
       </div>
 
     </div>
   </section>
 
   <footer>
-    <p style="font-size: 14px; color: var(--ink-muted);">&copy; 2026 Meghan Gilligan</p>
+    <p style="font-size: 12px; color: var(--ink-muted);">&copy; 2026 Meghan Gilligan | Educational Studies Portfolio</p>
+    <div style="margin-top: 1rem;">
+      <a href="mailto:meghan.gilligan@ontariotechu.net" style="text-decoration: none; color: var(--ink); font-size: 11px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">Contact</a>
+    </div>
   </footer>
 
   <script>
@@ -294,6 +549,14 @@
         navLinks.classList.remove('active');
       });
     });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   </script>
+
 </body>
 </html>
