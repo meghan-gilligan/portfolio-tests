@@ -100,7 +100,7 @@
 
     /* ── SECTIONS ── */
     section {
-      padding: 5rem 3rem; 
+      padding: 5rem 3rem;
       max-width: 1100px;
       margin: 0 auto;
     }
@@ -134,28 +134,40 @@
 
     .bio-col h1 em { font-style: italic; font-weight: 400; color: var(--accent-warm); }
 
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin: 1.5rem 0 2rem 0;
+    /* ── ICON GRID (replaces tag pills) ── */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 2.5rem;
+      margin: 1.75rem 0 2rem;
     }
 
-    .tag {
-      font-size: 12px;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      border: 1px solid var(--rule);
-      color: var(--accent);
-      letter-spacing: 0.05em;
-      background: rgba(123, 110, 93, 0.04);
-      border-radius: 2px;
+    .icon-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .icon-item svg {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      stroke: var(--accent-warm);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .icon-item span {
+      font-size: 14px;
+      color: var(--ink-soft);
     }
 
     /* ── MOBILE FIXES ── */
     @media (max-width: 768px) {
       nav { padding: 0 1.5rem; }
-      
+
       .menu-toggle { display: flex; }
 
       .nav-links {
@@ -169,7 +181,7 @@
         padding: 3rem 1.5rem;
         border-bottom: 1px solid var(--rule);
         gap: 2rem;
-        text-align: center; /* Keeping menu links centred as requested */
+        text-align: center;
         box-shadow: 0 10px 20px rgba(0,0,0,0.05);
       }
 
@@ -180,17 +192,17 @@
       .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
       section { padding: 4rem 1.5rem; }
-      
-      #home { 
-        grid-template-columns: 1fr; 
-        gap: 2.5rem; 
-        text-align: left; /* Removed centering from main home text */
+
+      #home {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: left;
         padding-top: 120px;
       }
-      
-      .photo-col { max-width: 280px; margin: 0; /* Removed auto margin to keep photo left-aligned */ }
-      
-      .tag-row { justify-content: flex-start; /* Removed centering from tags */ }
+
+      .photo-col { max-width: 280px; margin: 0; }
+
+      .icon-grid { grid-template-columns: 1fr 1fr; gap: 0.85rem 1.5rem; }
     }
 
     .fade-in { opacity: 0; transform: translateY(18px); transition: 0.8s ease; }
@@ -201,7 +213,7 @@
 
   <nav>
     <a class="nav-name" href="#home">Meghan Gilligan</a>
-    
+
     <button class="menu-toggle" id="mobile-menu" aria-label="Open Menu">
       <span></span>
       <span></span>
@@ -228,19 +240,79 @@
     <div class="bio-col">
       <p style="font-size: 14px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent-warm); margin-bottom: 0.5rem;">Educational Portfolio</p>
       <h1>Learning designer,<br /><em>educator,</em> and<br />career practitioner</h1>
-      
+
       <div class="bio-text">
         <p>My work has always been about meeting people in the middle of change.</p>
         <p style="margin-top: 1rem;">For more than fifteen years, I have worked across education, employment, and human development, helping people navigate transitions into work, education, and professional practice. I believe that good learning design begins with respecting the learner, and a genuine willingness to understand them.</p>
       </div>
 
-       <div class="tag-row">
-        <span class="tag">Adult Learning</span>
-        <span class="tag">Instructional Design</span>
-        <span class="tag">Career Development</span>
-        <span class="tag">Equity-Centred Practice</span>
-        <span class="tag">Experiential Learning</span>
-        <span class="tag">Facilitation</span>
+      <div class="icon-grid">
+
+        <!-- Adult Learning -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+          </svg>
+          <span>Adult Learning</span>
+        </div>
+
+        <!-- Instructional Design -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+          <span>Instructional Design</span>
+        </div>
+
+        <!-- Career Development -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+            <path d="M16 3.5l1.5 1.5L20 2"/>
+          </svg>
+          <span>Career Development</span>
+        </div>
+
+        <!-- Equity-Centred Practice -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            <path d="M2 12h20"/>
+          </svg>
+          <span>Equity-Centred Practice</span>
+        </div>
+
+        <!-- Experiential Learning -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24">
+            <path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/>
+            <path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+            <path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/>
+            <path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/>
+            <path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/>
+            <path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/>
+            <path d="M10 9.5C10 8.67 9.33 8 8.5 8H3.5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/>
+            <path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/>
+          </svg>
+          <span>Experiential Learning</span>
+        </div>
+
+        <!-- Facilitation -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <span>Facilitation</span>
+        </div>
+
       </div>
     </div>
   </section>
